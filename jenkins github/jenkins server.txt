@@ -1,0 +1,730 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\10840056\Downloads> ssh -i "jenkins-ishanjit.pem" ec2-user@ec2-54-196-45-195.compute-1.amazonaws.com
+The authenticity of host 'ec2-54-196-45-195.compute-1.amazonaws.com (54.196.45.195)' can't be established.
+ED25519 key fingerprint is SHA256:mO3gpg2GAXtXPOWixY4367vnxX/hEy1dF8LA38Ndb6E.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-54-196-45-195.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+[ec2-user@ip-172-31-38-38 ~]$ sudo su -
+[root@ip-172-31-38-38 ~]# hostnamectl set-hostname jenkins-server.com
+[root@ip-172-31-38-38 ~]# bash
+[root@jenkins-server ~]# yum update -y
+Amazon Linux 2023 Kernel Livepatch repository                                           175 kB/s |  19 kB     00:00
+Dependencies resolved.
+Nothing to do.
+Complete!
+[root@jenkins-server ~]# yum install jenkins
+Last metadata expiration check: 0:00:27 ago on Thu Aug  7 07:13:29 2025.
+No match for argument: jenkins
+Error: Unable to find a match: jenkins
+[root@jenkins-server ~]# yum install jenkins
+Last metadata expiration check: 0:04:08 ago on Thu Aug  7 07:13:29 2025.
+No match for argument: jenkins
+Error: Unable to find a match: jenkins
+[root@jenkins-server ~]# sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+--2025-08-07 07:19:25--  https://pkg.jenkins.io/redhat-stable/jenkins.repo
+Resolving pkg.jenkins.io (pkg.jenkins.io)... 146.75.34.133, 2a04:4e42:78::645
+Connecting to pkg.jenkins.io (pkg.jenkins.io)|146.75.34.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 85
+Saving to: ‘/etc/yum.repos.d/jenkins.repo’
+
+/etc/yum.repos.d/jenkins.repo 100%[=================================================>]      85  --.-KB/s    in 0s
+
+2025-08-07 07:19:25 (2.53 MB/s) - ‘/etc/yum.repos.d/jenkins.repo’ saved [85/85]
+
+[root@jenkins-server ~]# sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+[root@jenkins-server ~]# sudo yum upgrade
+Jenkins-stable                                                                          629 kB/s |  32 kB     00:00
+Dependencies resolved.
+Nothing to do.
+Complete!
+[root@jenkins-server ~]# sudo yum install java-17-amazon-corretto -y
+Last metadata expiration check: 0:00:12 ago on Thu Aug  7 07:20:07 2025.
+Dependencies resolved.
+========================================================================================================================
+ Package                                   Architecture    Version                           Repository            Size
+========================================================================================================================
+Installing:
+ java-17-amazon-corretto                   x86_64          1:17.0.16+8-1.amzn2023.1          amazonlinux          213 k
+Installing dependencies:
+ alsa-lib                                  x86_64          1.2.7.2-1.amzn2023.0.2            amazonlinux          504 k
+ cairo                                     x86_64          1.18.0-4.amzn2023.0.2             amazonlinux          717 k
+ dejavu-sans-fonts                         noarch          2.37-16.amzn2023.0.2              amazonlinux          1.3 M
+ dejavu-sans-mono-fonts                    noarch          2.37-16.amzn2023.0.2              amazonlinux          467 k
+ dejavu-serif-fonts                        noarch          2.37-16.amzn2023.0.2              amazonlinux          1.0 M
+ fontconfig                                x86_64          2.13.94-2.amzn2023.0.2            amazonlinux          273 k
+ fonts-filesystem                          noarch          1:2.0.5-12.amzn2023.0.2           amazonlinux          9.5 k
+ freetype                                  x86_64          2.13.2-5.amzn2023.0.1             amazonlinux          423 k
+ giflib                                    x86_64          5.2.1-9.amzn2023.0.1              amazonlinux           49 k
+ google-noto-fonts-common                  noarch          20240401-1.amzn2023.0.2           amazonlinux           17 k
+ google-noto-sans-vf-fonts                 noarch          20240401-1.amzn2023.0.2           amazonlinux          593 k
+ graphite2                                 x86_64          1.3.14-7.amzn2023.0.2             amazonlinux           97 k
+ harfbuzz                                  x86_64          7.0.0-2.amzn2023.0.2              amazonlinux          873 k
+ java-17-amazon-corretto-headless          x86_64          1:17.0.16+8-1.amzn2023.1          amazonlinux           91 M
+ javapackages-filesystem                   noarch          6.0.0-7.amzn2023.0.6              amazonlinux           12 k
+ langpacks-core-font-en                    noarch          3.0-21.amzn2023.0.4               amazonlinux           10 k
+ libICE                                    x86_64          1.1.1-3.amzn2023.0.1              amazonlinux           76 k
+ libSM                                     x86_64          1.2.4-3.amzn2023.0.1              amazonlinux           45 k
+ libX11                                    x86_64          1.8.10-2.amzn2023.0.1             amazonlinux          659 k
+ libX11-common                             noarch          1.8.10-2.amzn2023.0.1             amazonlinux          147 k
+ libXau                                    x86_64          1.0.11-6.amzn2023.0.1             amazonlinux           33 k
+ libXext                                   x86_64          1.3.6-1.amzn2023.0.1              amazonlinux           42 k
+ libXi                                     x86_64          1.8.2-1.amzn2023.0.1              amazonlinux           42 k
+ libXinerama                               x86_64          1.1.5-6.amzn2023.0.1              amazonlinux           16 k
+ libXrandr                                 x86_64          1.5.4-3.amzn2023.0.1              amazonlinux           29 k
+ libXrender                                x86_64          0.9.11-6.amzn2023.0.1             amazonlinux           29 k
+ libXt                                     x86_64          1.3.0-3.amzn2023.0.1              amazonlinux          183 k
+ libXtst                                   x86_64          1.2.5-1.amzn2023.0.1              amazonlinux           22 k
+ libbrotli                                 x86_64          1.0.9-4.amzn2023.0.2              amazonlinux          315 k
+ libjpeg-turbo                             x86_64          2.1.4-2.amzn2023.0.5              amazonlinux          190 k
+ libpng                                    x86_64          2:1.6.37-10.amzn2023.0.6          amazonlinux          128 k
+ libxcb                                    x86_64          1.17.0-1.amzn2023.0.1             amazonlinux          235 k
+ pixman                                    x86_64          0.43.4-1.amzn2023.0.4             amazonlinux          296 k
+ xml-common                                noarch          0.6.3-56.amzn2023.0.2             amazonlinux           32 k
+
+Transaction Summary
+========================================================================================================================
+Install  35 Packages
+
+Total download size: 100 M
+Installed size: 262 M
+Downloading Packages:
+(1/35): alsa-lib-1.2.7.2-1.amzn2023.0.2.x86_64.rpm                                      7.7 MB/s | 504 kB     00:00
+(2/35): cairo-1.18.0-4.amzn2023.0.2.x86_64.rpm                                          9.0 MB/s | 717 kB     00:00
+(3/35): dejavu-sans-fonts-2.37-16.amzn2023.0.2.noarch.rpm                                14 MB/s | 1.3 MB     00:00
+(4/35): dejavu-sans-mono-fonts-2.37-16.amzn2023.0.2.noarch.rpm                           11 MB/s | 467 kB     00:00
+(5/35): dejavu-serif-fonts-2.37-16.amzn2023.0.2.noarch.rpm                               25 MB/s | 1.0 MB     00:00
+(6/35): fonts-filesystem-2.0.5-12.amzn2023.0.2.noarch.rpm                               285 kB/s | 9.5 kB     00:00
+(7/35): fontconfig-2.13.94-2.amzn2023.0.2.x86_64.rpm                                    5.1 MB/s | 273 kB     00:00
+(8/35): freetype-2.13.2-5.amzn2023.0.1.x86_64.rpm                                        11 MB/s | 423 kB     00:00
+(9/35): giflib-5.2.1-9.amzn2023.0.1.x86_64.rpm                                          2.4 MB/s |  49 kB     00:00
+(10/35): google-noto-fonts-common-20240401-1.amzn2023.0.2.noarch.rpm                    769 kB/s |  17 kB     00:00
+(11/35): graphite2-1.3.14-7.amzn2023.0.2.x86_64.rpm                                     3.1 MB/s |  97 kB     00:00
+(12/35): google-noto-sans-vf-fonts-20240401-1.amzn2023.0.2.noarch.rpm                    13 MB/s | 593 kB     00:00
+(13/35): harfbuzz-7.0.0-2.amzn2023.0.2.x86_64.rpm                                        20 MB/s | 873 kB     00:00
+(14/35): java-17-amazon-corretto-17.0.16+8-1.amzn2023.1.x86_64.rpm                      7.5 MB/s | 213 kB     00:00
+(15/35): javapackages-filesystem-6.0.0-7.amzn2023.0.6.noarch.rpm                        472 kB/s |  12 kB     00:00
+(16/35): langpacks-core-font-en-3.0-21.amzn2023.0.4.noarch.rpm                          485 kB/s |  10 kB     00:00
+(17/35): libSM-1.2.4-3.amzn2023.0.1.x86_64.rpm                                          2.0 MB/s |  45 kB     00:00
+(18/35): libICE-1.1.1-3.amzn2023.0.1.x86_64.rpm                                         2.4 MB/s |  76 kB     00:00
+(19/35): libX11-common-1.8.10-2.amzn2023.0.1.noarch.rpm                                 4.4 MB/s | 147 kB     00:00
+(20/35): libX11-1.8.10-2.amzn2023.0.1.x86_64.rpm                                         14 MB/s | 659 kB     00:00
+(21/35): libXau-1.0.11-6.amzn2023.0.1.x86_64.rpm                                        1.5 MB/s |  33 kB     00:00
+(22/35): libXext-1.3.6-1.amzn2023.0.1.x86_64.rpm                                        1.9 MB/s |  42 kB     00:00
+(23/35): libXi-1.8.2-1.amzn2023.0.1.x86_64.rpm                                          1.8 MB/s |  42 kB     00:00
+(24/35): libXinerama-1.1.5-6.amzn2023.0.1.x86_64.rpm                                    432 kB/s |  16 kB     00:00
+(25/35): libXrandr-1.5.4-3.amzn2023.0.1.x86_64.rpm                                      1.1 MB/s |  29 kB     00:00
+(26/35): libXrender-0.9.11-6.amzn2023.0.1.x86_64.rpm                                    1.3 MB/s |  29 kB     00:00
+(27/35): libXt-1.3.0-3.amzn2023.0.1.x86_64.rpm                                          5.0 MB/s | 183 kB     00:00
+(28/35): libXtst-1.2.5-1.amzn2023.0.1.x86_64.rpm                                        1.1 MB/s |  22 kB     00:00
+(29/35): libbrotli-1.0.9-4.amzn2023.0.2.x86_64.rpm                                      7.5 MB/s | 315 kB     00:00
+(30/35): libjpeg-turbo-2.1.4-2.amzn2023.0.5.x86_64.rpm                                  3.6 MB/s | 190 kB     00:00
+(31/35): libpng-1.6.37-10.amzn2023.0.6.x86_64.rpm                                       4.2 MB/s | 128 kB     00:00
+(32/35): libxcb-1.17.0-1.amzn2023.0.1.x86_64.rpm                                        6.5 MB/s | 235 kB     00:00
+(33/35): pixman-0.43.4-1.amzn2023.0.4.x86_64.rpm                                        7.4 MB/s | 296 kB     00:00
+(34/35): xml-common-0.6.3-56.amzn2023.0.2.noarch.rpm                                    1.3 MB/s |  32 kB     00:00
+(35/35): java-17-amazon-corretto-headless-17.0.16+8-1.amzn2023.1.x86_64.rpm              66 MB/s |  91 MB     00:01
+------------------------------------------------------------------------------------------------------------------------
+Total                                                                                    62 MB/s | 100 MB     00:01
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                1/1
+  Installing       : fonts-filesystem-1:2.0.5-12.amzn2023.0.2.noarch                                               1/35
+  Installing       : libpng-2:1.6.37-10.amzn2023.0.6.x86_64                                                        2/35
+  Installing       : dejavu-sans-mono-fonts-2.37-16.amzn2023.0.2.noarch                                            3/35
+  Installing       : dejavu-sans-fonts-2.37-16.amzn2023.0.2.noarch                                                 4/35
+  Installing       : libICE-1.1.1-3.amzn2023.0.1.x86_64                                                            5/35
+  Installing       : libSM-1.2.4-3.amzn2023.0.1.x86_64                                                             6/35
+  Installing       : dejavu-serif-fonts-2.37-16.amzn2023.0.2.noarch                                                7/35
+  Running scriptlet: xml-common-0.6.3-56.amzn2023.0.2.noarch                                                       8/35
+  Installing       : xml-common-0.6.3-56.amzn2023.0.2.noarch                                                       8/35
+  Installing       : pixman-0.43.4-1.amzn2023.0.4.x86_64                                                           9/35
+  Installing       : libjpeg-turbo-2.1.4-2.amzn2023.0.5.x86_64                                                    10/35
+  Installing       : libbrotli-1.0.9-4.amzn2023.0.2.x86_64                                                        11/35
+  Installing       : libXau-1.0.11-6.amzn2023.0.1.x86_64                                                          12/35
+  Installing       : libxcb-1.17.0-1.amzn2023.0.1.x86_64                                                          13/35
+  Installing       : libX11-common-1.8.10-2.amzn2023.0.1.noarch                                                   14/35
+  Installing       : libX11-1.8.10-2.amzn2023.0.1.x86_64                                                          15/35
+  Installing       : libXext-1.3.6-1.amzn2023.0.1.x86_64                                                          16/35
+  Installing       : libXrender-0.9.11-6.amzn2023.0.1.x86_64                                                      17/35
+  Installing       : libXi-1.8.2-1.amzn2023.0.1.x86_64                                                            18/35
+  Installing       : libXtst-1.2.5-1.amzn2023.0.1.x86_64                                                          19/35
+  Installing       : libXrandr-1.5.4-3.amzn2023.0.1.x86_64                                                        20/35
+  Installing       : libXinerama-1.1.5-6.amzn2023.0.1.x86_64                                                      21/35
+  Installing       : libXt-1.3.0-3.amzn2023.0.1.x86_64                                                            22/35
+  Installing       : javapackages-filesystem-6.0.0-7.amzn2023.0.6.noarch                                          23/35
+  Installing       : graphite2-1.3.14-7.amzn2023.0.2.x86_64                                                       24/35
+  Installing       : google-noto-fonts-common-20240401-1.amzn2023.0.2.noarch                                      25/35
+  Installing       : google-noto-sans-vf-fonts-20240401-1.amzn2023.0.2.noarch                                     26/35
+  Installing       : langpacks-core-font-en-3.0-21.amzn2023.0.4.noarch                                            27/35
+  Installing       : cairo-1.18.0-4.amzn2023.0.2.x86_64                                                           28/35
+  Installing       : harfbuzz-7.0.0-2.amzn2023.0.2.x86_64                                                         29/35
+  Installing       : freetype-2.13.2-5.amzn2023.0.1.x86_64                                                        30/35
+  Installing       : fontconfig-2.13.94-2.amzn2023.0.2.x86_64                                                     31/35
+  Running scriptlet: fontconfig-2.13.94-2.amzn2023.0.2.x86_64                                                     31/35
+  Installing       : giflib-5.2.1-9.amzn2023.0.1.x86_64                                                           32/35
+  Installing       : alsa-lib-1.2.7.2-1.amzn2023.0.2.x86_64                                                       33/35
+  Installing       : java-17-amazon-corretto-headless-1:17.0.16+8-1.amzn2023.1.x86_64                             34/35
+  Running scriptlet: java-17-amazon-corretto-headless-1:17.0.16+8-1.amzn2023.1.x86_64                             34/35
+  Installing       : java-17-amazon-corretto-1:17.0.16+8-1.amzn2023.1.x86_64                                      35/35
+  Running scriptlet: fontconfig-2.13.94-2.amzn2023.0.2.x86_64                                                     35/35
+  Running scriptlet: java-17-amazon-corretto-1:17.0.16+8-1.amzn2023.1.x86_64                                      35/35
+  Verifying        : alsa-lib-1.2.7.2-1.amzn2023.0.2.x86_64                                                        1/35
+  Verifying        : cairo-1.18.0-4.amzn2023.0.2.x86_64                                                            2/35
+  Verifying        : dejavu-sans-fonts-2.37-16.amzn2023.0.2.noarch                                                 3/35
+  Verifying        : dejavu-sans-mono-fonts-2.37-16.amzn2023.0.2.noarch                                            4/35
+  Verifying        : dejavu-serif-fonts-2.37-16.amzn2023.0.2.noarch                                                5/35
+  Verifying        : fontconfig-2.13.94-2.amzn2023.0.2.x86_64                                                      6/35
+  Verifying        : fonts-filesystem-1:2.0.5-12.amzn2023.0.2.noarch                                               7/35
+  Verifying        : freetype-2.13.2-5.amzn2023.0.1.x86_64                                                         8/35
+  Verifying        : giflib-5.2.1-9.amzn2023.0.1.x86_64                                                            9/35
+  Verifying        : google-noto-fonts-common-20240401-1.amzn2023.0.2.noarch                                      10/35
+  Verifying        : google-noto-sans-vf-fonts-20240401-1.amzn2023.0.2.noarch                                     11/35
+  Verifying        : graphite2-1.3.14-7.amzn2023.0.2.x86_64                                                       12/35
+  Verifying        : harfbuzz-7.0.0-2.amzn2023.0.2.x86_64                                                         13/35
+  Verifying        : java-17-amazon-corretto-1:17.0.16+8-1.amzn2023.1.x86_64                                      14/35
+  Verifying        : java-17-amazon-corretto-headless-1:17.0.16+8-1.amzn2023.1.x86_64                             15/35
+  Verifying        : javapackages-filesystem-6.0.0-7.amzn2023.0.6.noarch                                          16/35
+  Verifying        : langpacks-core-font-en-3.0-21.amzn2023.0.4.noarch                                            17/35
+  Verifying        : libICE-1.1.1-3.amzn2023.0.1.x86_64                                                           18/35
+  Verifying        : libSM-1.2.4-3.amzn2023.0.1.x86_64                                                            19/35
+  Verifying        : libX11-1.8.10-2.amzn2023.0.1.x86_64                                                          20/35
+  Verifying        : libX11-common-1.8.10-2.amzn2023.0.1.noarch                                                   21/35
+  Verifying        : libXau-1.0.11-6.amzn2023.0.1.x86_64                                                          22/35
+  Verifying        : libXext-1.3.6-1.amzn2023.0.1.x86_64                                                          23/35
+  Verifying        : libXi-1.8.2-1.amzn2023.0.1.x86_64                                                            24/35
+  Verifying        : libXinerama-1.1.5-6.amzn2023.0.1.x86_64                                                      25/35
+  Verifying        : libXrandr-1.5.4-3.amzn2023.0.1.x86_64                                                        26/35
+  Verifying        : libXrender-0.9.11-6.amzn2023.0.1.x86_64                                                      27/35
+  Verifying        : libXt-1.3.0-3.amzn2023.0.1.x86_64                                                            28/35
+  Verifying        : libXtst-1.2.5-1.amzn2023.0.1.x86_64                                                          29/35
+  Verifying        : libbrotli-1.0.9-4.amzn2023.0.2.x86_64                                                        30/35
+  Verifying        : libjpeg-turbo-2.1.4-2.amzn2023.0.5.x86_64                                                    31/35
+  Verifying        : libpng-2:1.6.37-10.amzn2023.0.6.x86_64                                                       32/35
+  Verifying        : libxcb-1.17.0-1.amzn2023.0.1.x86_64                                                          33/35
+  Verifying        : pixman-0.43.4-1.amzn2023.0.4.x86_64                                                          34/35
+  Verifying        : xml-common-0.6.3-56.amzn2023.0.2.noarch                                                      35/35
+
+Installed:
+  alsa-lib-1.2.7.2-1.amzn2023.0.2.x86_64
+  cairo-1.18.0-4.amzn2023.0.2.x86_64
+  dejavu-sans-fonts-2.37-16.amzn2023.0.2.noarch
+  dejavu-sans-mono-fonts-2.37-16.amzn2023.0.2.noarch
+  dejavu-serif-fonts-2.37-16.amzn2023.0.2.noarch
+  fontconfig-2.13.94-2.amzn2023.0.2.x86_64
+  fonts-filesystem-1:2.0.5-12.amzn2023.0.2.noarch
+  freetype-2.13.2-5.amzn2023.0.1.x86_64
+  giflib-5.2.1-9.amzn2023.0.1.x86_64
+  google-noto-fonts-common-20240401-1.amzn2023.0.2.noarch
+  google-noto-sans-vf-fonts-20240401-1.amzn2023.0.2.noarch
+  graphite2-1.3.14-7.amzn2023.0.2.x86_64
+  harfbuzz-7.0.0-2.amzn2023.0.2.x86_64
+  java-17-amazon-corretto-1:17.0.16+8-1.amzn2023.1.x86_64
+  java-17-amazon-corretto-headless-1:17.0.16+8-1.amzn2023.1.x86_64
+  javapackages-filesystem-6.0.0-7.amzn2023.0.6.noarch
+  langpacks-core-font-en-3.0-21.amzn2023.0.4.noarch
+  libICE-1.1.1-3.amzn2023.0.1.x86_64
+  libSM-1.2.4-3.amzn2023.0.1.x86_64
+  libX11-1.8.10-2.amzn2023.0.1.x86_64
+  libX11-common-1.8.10-2.amzn2023.0.1.noarch
+  libXau-1.0.11-6.amzn2023.0.1.x86_64
+  libXext-1.3.6-1.amzn2023.0.1.x86_64
+  libXi-1.8.2-1.amzn2023.0.1.x86_64
+  libXinerama-1.1.5-6.amzn2023.0.1.x86_64
+  libXrandr-1.5.4-3.amzn2023.0.1.x86_64
+  libXrender-0.9.11-6.amzn2023.0.1.x86_64
+  libXt-1.3.0-3.amzn2023.0.1.x86_64
+  libXtst-1.2.5-1.amzn2023.0.1.x86_64
+  libbrotli-1.0.9-4.amzn2023.0.2.x86_64
+  libjpeg-turbo-2.1.4-2.amzn2023.0.5.x86_64
+  libpng-2:1.6.37-10.amzn2023.0.6.x86_64
+  libxcb-1.17.0-1.amzn2023.0.1.x86_64
+  pixman-0.43.4-1.amzn2023.0.4.x86_64
+  xml-common-0.6.3-56.amzn2023.0.2.noarch
+
+Complete!
+[root@jenkins-server ~]# sudo yum install jenkins -y
+Last metadata expiration check: 0:00:26 ago on Thu Aug  7 07:20:07 2025.
+Dependencies resolved.
+========================================================================================================================
+ Package                    Architecture              Version                          Repository                  Size
+========================================================================================================================
+Installing:
+ jenkins                    noarch                    2.516.1-1.1                      jenkins                     83 M
+
+Transaction Summary
+========================================================================================================================
+Install  1 Package
+
+Total download size: 83 M
+Installed size: 83 M
+Downloading Packages:
+jenkins-2.516.1-1.1.noarch.rpm                                                          3.7 MB/s |  83 MB     00:22
+------------------------------------------------------------------------------------------------------------------------
+Total                                                                                   3.7 MB/s |  83 MB     00:22
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                1/1
+  Running scriptlet: jenkins-2.516.1-1.1.noarch                                                                     1/1
+  Installing       : jenkins-2.516.1-1.1.noarch                                                                     1/1
+  Running scriptlet: jenkins-2.516.1-1.1.noarch                                                                     1/1
+  Verifying        : jenkins-2.516.1-1.1.noarch                                                                     1/1
+
+Installed:
+  jenkins-2.516.1-1.1.noarch
+
+Complete!
+[root@jenkins-server ~]# sudo systemctl enable jenkins
+Created symlink /etc/systemd/system/multi-user.target.wants/jenkins.service → /usr/lib/systemd/system/jenkins.service.
+[root@jenkins-server ~]# sudo systemctl start jenkins
+[root@jenkins-server ~]# sudo systemctl status jenkins
+● jenkins.service - Jenkins Continuous Integration Server
+     Loaded: loaded (/usr/lib/systemd/system/jenkins.service; enabled; preset: disabled)
+     Active: active (running) since Thu 2025-08-07 07:22:12 UTC; 9s ago
+   Main PID: 26616 (java)
+      Tasks: 45 (limit: 1111)
+     Memory: 359.5M
+        CPU: 15.548s
+     CGroup: /system.slice/jenkins.service
+             └─26616 /usr/bin/java -Djava.awt.headless=true -jar /usr/share/java/jenkins.war --webroot=/var/cache/jenki>
+
+Aug 07 07:22:06 jenkins-server.com jenkins[26616]: This may also be found at: /var/lib/jenkins/secrets/initialAdminPass>
+Aug 07 07:22:06 jenkins-server.com jenkins[26616]: *************************************************************
+Aug 07 07:22:06 jenkins-server.com jenkins[26616]: *************************************************************
+Aug 07 07:22:06 jenkins-server.com jenkins[26616]: *************************************************************
+Aug 07 07:22:12 jenkins-server.com jenkins[26616]: 2025-08-07 07:22:12.353+0000 [id=31]        INFO        jenkins.Init>
+Aug 07 07:22:12 jenkins-server.com jenkins[26616]: 2025-08-07 07:22:12.383+0000 [id=23]        INFO        hudson.lifec>
+Aug 07 07:22:12 jenkins-server.com systemd[1]: Started jenkins.service - Jenkins Continuous Integration Server.
+Aug 07 07:22:12 jenkins-server.com jenkins[26616]: 2025-08-07 07:22:12.558+0000 [id=47]        INFO        h.m.Download>
+Aug 07 07:22:12 jenkins-server.com jenkins[26616]: 2025-08-07 07:22:12.559+0000 [id=47]        INFO        hudson.util.>
+Aug 07 07:22:17 jenkins-server.com jenkins[26616]: 2025-08-07 07:22:17.479+0000 [id=69]        WARNING        h.n.DiskS>
+lines 1-20/20 (END)
+[root@jenkins-server ~]# cat /var/lib/jenkins/secrets/initialAdminPass
+cat: /var/lib/jenkins/secrets/initialAdminPass: No such file or directory
+[root@jenkins-server ~]# sudo cat /var/lib/jenkins/secrets/initialAdminPass
+cat: /var/lib/jenkins/secrets/initialAdminPass: No such file or directory
+[root@jenkins-server ~]# ip a s
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute
+       valid_lft forever preferred_lft forever
+2: enX0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc fq_codel state UP group default qlen 1000
+    link/ether 0e:72:f0:88:04:3b brd ff:ff:ff:ff:ff:ff
+    altname eni-0dd9faf0b7ea5e1b0
+    altname device-number-0.0
+    inet 172.31.38.38/20 metric 512 brd 172.31.47.255 scope global dynamic enX0
+       valid_lft 2427sec preferred_lft 2427sec
+    inet6 fe80::c72:f0ff:fe88:43b/64 scope link proto kernel_ll
+       valid_lft forever preferred_lft forever
+[root@jenkins-server ~]# sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+740eff5f8c5843a49644fcc6fcfc08f3
+[root@jenkins-server ~]#
+Broadcast message from root@localhost (Thu 2025-08-07 07:32:51 UTC):
+
+The system will power off now!
+
+
+Broadcast message from root@localhost (Thu 2025-08-07 07:32:51 UTC):
+
+The system will power off now!
+
+Connection to ec2-54-196-45-195.compute-1.amazonaws.com closed by remote host.
+Connection to ec2-54-196-45-195.compute-1.amazonaws.com closed.
+PS C:\Users\10840056\Downloads> ssh -i "jenkins-ishanjit.pem" ec2-user@ec2-18-232-99-31.compute-1.amazonaws.com
+The authenticity of host 'ec2-18-232-99-31.compute-1.amazonaws.com (18.232.99.31)' can't be established.
+ED25519 key fingerprint is SHA256:mO3gpg2GAXtXPOWixY4367vnxX/hEy1dF8LA38Ndb6E.
+This host key is known by the following other names/addresses:
+    C:\Users\10840056/.ssh/known_hosts:14: ec2-54-196-45-195.compute-1.amazonaws.com
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-18-232-99-31.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Thu Aug  7 07:11:35 2025 from 103.244.155.144
+[ec2-user@jenkins-server ~]$ sudo su -
+Last login: Thu Aug  7 07:11:41 UTC 2025 on pts/1
+[root@jenkins-server ~]# bash
+[root@jenkins-server ~]# ip a s
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute
+       valid_lft forever preferred_lft forever
+2: enX0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc fq_codel state UP group default qlen 1000
+    link/ether 0e:72:f0:88:04:3b brd ff:ff:ff:ff:ff:ff
+    altname eni-0dd9faf0b7ea5e1b0
+    altname device-number-0.0
+    inet 172.31.38.38/20 metric 512 brd 172.31.47.255 scope global dynamic enX0
+       valid_lft 2464sec preferred_lft 2464sec
+    inet6 fe80::c72:f0ff:fe88:43b/64 scope link proto kernel_ll
+       valid_lft forever preferred_lft forever
+[root@jenkins-server ~]# cd /var/libs/jenkins/
+bash: cd: /var/libs/jenkins/: No such file or directory
+[root@jenkins-server ~]# cd /var/libs/jenkins/
+bash: cd: /var/libs/jenkins/: No such file or directory
+[root@jenkins-server ~]# cd ..
+[root@jenkins-server /]# cd /var/libs/jenkins/
+bash: cd: /var/libs/jenkins/: No such file or directory
+[root@jenkins-server /]# systemctl status jenkins
+● jenkins.service - Jenkins Continuous Integration Server
+     Loaded: loaded (/usr/lib/systemd/system/jenkins.service; enabled; preset: disabled)
+     Active: active (running) since Thu 2025-08-07 08:26:03 UTC; 32min ago
+   Main PID: 1991 (java)
+      Tasks: 38 (limit: 1111)
+     Memory: 514.1M
+        CPU: 29.521s
+     CGroup: /system.slice/jenkins.service
+             └─1991 /usr/bin/java -Djava.awt.headless=true -jar /usr/share/java/jenkins.war --webroot=/var/cache/jenkin>
+
+Aug 07 08:26:03 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:03.730+0000 [id=29]        INFO        jenkins.InitR>
+Aug 07 08:26:03 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:03.733+0000 [id=29]        INFO        jenkins.InitR>
+Aug 07 08:26:03 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:03.739+0000 [id=29]        INFO        jenkins.InitR>
+Aug 07 08:26:03 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:03.754+0000 [id=30]        INFO        jenkins.InitR>
+Aug 07 08:26:03 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:03.858+0000 [id=29]        INFO        jenkins.InitR>
+Aug 07 08:26:03 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:03.921+0000 [id=23]        INFO        hudson.lifecy>
+Aug 07 08:26:03 jenkins-server.com systemd[1]: Started jenkins.service - Jenkins Continuous Integration Server.
+Aug 07 08:26:09 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:09.023+0000 [id=57]        WARNING        h.n.DiskSp>
+Aug 07 08:26:50 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:50.983+0000 [id=62]        WARNING        j.m.api.Me>
+Aug 07 08:41:40 jenkins-server.com jenkins[1991]: 2025-08-07 08:41:40.133+0000 [id=16]        WARNING        h.n.DiskSp>
+...skipping...
+● jenkins.service - Jenkins Continuous Integration Server
+     Loaded: loaded (/usr/lib/systemd/system/jenkins.service; enabled; preset: disabled)
+     Active: active (running) since Thu 2025-08-07 08:26:03 UTC; 32min ago
+   Main PID: 1991 (java)
+      Tasks: 38 (limit: 1111)
+     Memory: 514.1M
+        CPU: 29.521s
+     CGroup: /system.slice/jenkins.service
+             └─1991 /usr/bin/java -Djava.awt.headless=true -jar /usr/share/java/jenkins.war --webroot=/var/cache/jenkin>
+
+Aug 07 08:26:03 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:03.730+0000 [id=29]        INFO        jenkins.InitR>
+Aug 07 08:26:03 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:03.733+0000 [id=29]        INFO        jenkins.InitR>
+Aug 07 08:26:03 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:03.739+0000 [id=29]        INFO        jenkins.InitR>
+Aug 07 08:26:03 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:03.754+0000 [id=30]        INFO        jenkins.InitR>
+Aug 07 08:26:03 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:03.858+0000 [id=29]        INFO        jenkins.InitR>
+Aug 07 08:26:03 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:03.921+0000 [id=23]        INFO        hudson.lifecy>
+Aug 07 08:26:03 jenkins-server.com systemd[1]: Started jenkins.service - Jenkins Continuous Integration Server.
+Aug 07 08:26:09 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:09.023+0000 [id=57]        WARNING        h.n.DiskSp>
+Aug 07 08:26:50 jenkins-server.com jenkins[1991]: 2025-08-07 08:26:50.983+0000 [id=62]        WARNING        j.m.api.Me>
+Aug 07 08:41:40 jenkins-server.com jenkins[1991]: 2025-08-07 08:41:40.133+0000 [id=16]        WARNING        h.n.DiskSp>
+~
+~
+~
+~
+~
+~
+~
+~
+~
+lines 1-20/20 (END)
+:wq!
+bash: :wq!: command not found
+[root@jenkins-server /]# cd /var/libs/jenkins/
+bash: cd: /var/libs/jenkins/: No such file or directory
+[root@jenkins-server /]# systemctl restart jenkins
+[root@jenkins-server /]# cd /var/libs/jenkins/
+bash: cd: /var/libs/jenkins/: No such file or directory
+[root@jenkins-server /]# cd /var/libs/jenkins/
+bash: cd: /var/libs/jenkins/: No such file or directory
+[root@jenkins-server /]# cd /var/libs/jenkins
+bash: cd: /var/libs/jenkins: No such file or directory
+[root@jenkins-server /]# cd /var/lib/jenkins
+[root@jenkins-server jenkins]# ll
+total 60
+-rw-r--r--.  1 jenkins jenkins  1660 Aug  7 09:03 config.xml
+-rw-r--r--.  1 jenkins jenkins   156 Aug  7 09:03 hudson.model.UpdateCenter.xml
+-rw-r--r--.  1 jenkins jenkins   370 Aug  7 07:29 hudson.plugins.git.GitTool.xml
+-rw-------.  1 jenkins jenkins  1680 Aug  7 07:29 identity.key.enc
+-rw-r--r--.  1 jenkins jenkins     7 Aug  7 09:03 jenkins.install.InstallUtil.lastExecVersion
+-rw-r--r--.  1 jenkins jenkins     7 Aug  7 07:30 jenkins.install.UpgradeWizard.state
+-rw-r--r--.  1 jenkins jenkins   183 Aug  7 07:30 jenkins.model.JenkinsLocationConfiguration.xml
+-rw-r--r--.  1 jenkins jenkins   171 Aug  7 07:22 jenkins.telemetry.Correlator.xml
+drwxr-xr-x.  2 jenkins jenkins     6 Aug  7 07:22 jobs
+drwxr-xr-x.  2 jenkins jenkins    32 Aug  7 07:29 logs
+-rw-r--r--.  1 jenkins jenkins  1037 Aug  7 09:03 nodeMonitors.xml
+drwxr-xr-x. 89 jenkins jenkins 16384 Aug  7 07:29 plugins
+-rw-r--r--.  1 jenkins jenkins   258 Aug  7 09:03 queue.xml.bak
+-rw-r--r--.  1 jenkins jenkins    64 Aug  7 07:22 secret.key
+-rw-r--r--.  1 jenkins jenkins     0 Aug  7 07:22 secret.key.not-so-secret
+drwx------.  2 jenkins jenkins   162 Aug  7 08:35 secrets
+drwxr-xr-x.  2 jenkins jenkins   149 Aug  7 07:29 updates
+drwxr-xr-x.  2 jenkins jenkins    24 Aug  7 07:22 userContent
+drwxr-xr-x.  3 jenkins jenkins    56 Aug  7 07:30 users
+[root@jenkins-server jenkins]# vim jenkins.model.JenkinsLocationConfiguration.xml
+[root@jenkins-server jenkins]#
+Broadcast message from root@jenkins-server.com (Thu 2025-08-07 09:08:09 UTC):
+
+The system will power off now!
+
+
+Broadcast message from root@jenkins-server.com (Thu 2025-08-07 09:08:09 UTC):
+
+The system will power off now!
+
+Connection to ec2-18-232-99-31.compute-1.amazonaws.com closed by remote host.
+Connection to ec2-18-232-99-31.compute-1.amazonaws.com closed.
+PS C:\Users\10840056\Downloads> ssh -i "jenkins-ishanjit.pem" ec2-user@ec2-18-232-99-31.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Thu Aug  7 08:26:59 2025 from 103.244.155.144
+[ec2-user@jenkins-server ~]$ sudo su -
+Last login: Thu Aug  7 08:27:23 UTC 2025 on pts/1
+[root@jenkins-server ~]# vim jenkins.model.JenkinsLocationConfiguration.xml
+
+[1]+  Stopped                 vim jenkins.model.JenkinsLocationConfiguration.xml
+[root@jenkins-server ~]#                                                                    ^Z
+
+[1]+  Stopped                 vim jenkins.model.JenkinsLocationConfiguration.xml
+[root@jenkins-server ~]# cd /var/lib/jenkins
+[root@jenkins-server jenkins]# ll
+total 60
+-rw-r--r--.  1 jenkins jenkins  1660 Aug  7 09:08 config.xml
+-rw-r--r--.  1 jenkins jenkins   156 Aug  7 09:08 hudson.model.UpdateCenter.xml
+-rw-r--r--.  1 jenkins jenkins   370 Aug  7 07:29 hudson.plugins.git.GitTool.xml
+-rw-------.  1 jenkins jenkins  1680 Aug  7 07:29 identity.key.enc
+-rw-r--r--.  1 jenkins jenkins     7 Aug  7 09:08 jenkins.install.InstallUtil.lastExecVersion
+-rw-r--r--.  1 jenkins jenkins     7 Aug  7 07:30 jenkins.install.UpgradeWizard.state
+-rw-r--r--.  1 jenkins jenkins   183 Aug  7 09:07 jenkins.model.JenkinsLocationConfiguration.xml
+-rw-r--r--.  1 jenkins jenkins   171 Aug  7 07:22 jenkins.telemetry.Correlator.xml
+drwxr-xr-x.  2 jenkins jenkins     6 Aug  7 07:22 jobs
+drwxr-xr-x.  2 jenkins jenkins    32 Aug  7 07:29 logs
+-rw-r--r--.  1 jenkins jenkins  1037 Aug  7 09:08 nodeMonitors.xml
+drwxr-xr-x. 89 jenkins jenkins 16384 Aug  7 07:29 plugins
+-rw-r--r--.  1 jenkins jenkins   258 Aug  7 09:08 queue.xml.bak
+-rw-r--r--.  1 jenkins jenkins    64 Aug  7 07:22 secret.key
+-rw-r--r--.  1 jenkins jenkins     0 Aug  7 07:22 secret.key.not-so-secret
+drwx------.  2 jenkins jenkins   162 Aug  7 08:35 secrets
+drwxr-xr-x.  2 jenkins jenkins   149 Aug  7 07:29 updates
+drwxr-xr-x.  2 jenkins jenkins    24 Aug  7 07:22 userContent
+drwxr-xr-x.  3 jenkins jenkins    56 Aug  7 07:30 users
+[root@jenkins-server jenkins]# vim jenkins.model.JenkinsLocationConfiguration.xml
+
+[2]+  Stopped                 vim jenkins.model.JenkinsLocationConfiguration.xml
+[root@jenkins-server jenkins]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           475M     0  475M   0% /dev/shm
+tmpfs           190M  444K  190M   1% /run
+/dev/xvda1       15G  2.3G   13G  15% /
+tmpfs           475M  4.5M  471M   1% /tmp
+/dev/xvda128     10M  1.3M  8.7M  13% /boot/efi
+tmpfs            95M     0   95M   0% /run/user/1000
+[root@jenkins-server jenkins]# sudo mount -o remount,size=2G /tmp
+[root@jenkins-server jenkins]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           475M     0  475M   0% /dev/shm
+tmpfs           190M  444K  190M   1% /run
+/dev/xvda1       15G  2.3G   13G  15% /
+tmpfs           2.0G  4.5M  2.0G   1% /tmp
+/dev/xvda128     10M  1.3M  8.7M  13% /boot/efi
+tmpfs            95M     0   95M   0% /run/user/1000
+[root@jenkins-server jenkins]# vim /etc/fstab
+
+[3]+  Stopped                 vim /etc/fstab
+[root@jenkins-server jenkins]# systemctl daemon-reload
+[root@jenkins-server jenkins]#
+[root@jenkins-server jenkins]# mount -a
+[root@jenkins-server jenkins]# systemctl daemon-reload
+[root@jenkins-server jenkins]# vim /etc/fstab
+[root@jenkins-server jenkins]# cd
+[root@jenkins-server ~]# vim /etc/fstab
+[root@jenkins-server ~]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           475M     0  475M   0% /dev/shm
+tmpfs           190M  444K  190M   1% /run
+/dev/xvda1       15G  2.3G   13G  15% /
+tmpfs           2.0G  4.5M  2.0G   1% /tmp
+/dev/xvda128     10M  1.3M  8.7M  13% /boot/efi
+tmpfs            95M     0   95M   0% /run/user/1000
+[root@jenkins-server ~]# cd /tmp/
+[root@jenkins-server tmp]# ll
+total 4572
+drwxr-xr-x. 2 jenkins jenkins      60 Aug  7 09:08 hsperfdata_jenkins
+drwxr-xr-x. 2 jenkins jenkins      40 Aug  7 09:08 jetty-0_0_0_0-8080-war-_-any-1321724871995324621
+drwx------. 3 root    root         60 Aug  7 09:08 systemd-private-9a60c78747724964bcadab9e8da576af-chronyd.service-bNNLOl
+drwx------. 3 root    root         60 Aug  7 09:08 systemd-private-9a60c78747724964bcadab9e8da576af-dbus-broker.service-pjYRi2
+drwx------. 3 root    root         60 Aug  7 09:08 systemd-private-9a60c78747724964bcadab9e8da576af-policy-routes@enX0.service-0RroiF
+drwx------. 3 root    root         60 Aug  7 09:08 systemd-private-9a60c78747724964bcadab9e8da576af-systemd-logind.service-wBBUpz
+drwx------. 3 root    root         60 Aug  7 09:08 systemd-private-9a60c78747724964bcadab9e8da576af-systemd-resolved.service-wezUMr
+-rw-r--r--. 1 jenkins jenkins 4677732 Aug  7 09:08 winstone11461421528125603510.jar
+[root@jenkins-server tmp]# sudo mount -o remount,size=2G /tmp
+[root@jenkins-server tmp]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           475M     0  475M   0% /dev/shm
+tmpfs           190M  444K  190M   1% /run
+/dev/xvda1       15G  2.3G   13G  15% /
+tmpfs           2.0G  4.5M  2.0G   1% /tmp
+/dev/xvda128     10M  1.3M  8.7M  13% /boot/efi
+tmpfs            95M     0   95M   0% /run/user/1000
+[root@jenkins-server tmp]# cd
+[root@jenkins-server ~]#
+[root@jenkins-server ~]#
+[root@jenkins-server ~]#
+[root@jenkins-server ~]# vim/etc/fstab
+-bash: vim/etc/fstab: No such file or directory
+[root@jenkins-server ~]# vim /etc/fstab
+"/etc/fstab" 5L, 285B written
+[root@jenkins-server ~]# mount -a
+[root@jenkins-server ~]# systemctl daemon-reload
+[root@jenkins-server ~]# vim /etc/fstab
+[root@jenkins-server ~]# systemctl daemon-reload
+[root@jenkins-server ~]# mount -a
+[root@jenkins-server ~]# systemctl daemon-reload
+[root@jenkins-server ~]# vim /etc/fstab
+[root@jenkins-server ~]# mount -a
+[root@jenkins-server ~]# systemctl daemon-reload
+[root@jenkins-server ~]# sudo mount -a
+[root@jenkins-server ~]# systemctl daemon-reload
+[root@jenkins-server ~]#
+Broadcast message from root@jenkins-server.com (Thu 2025-08-07 10:12:05 UTC):
+
+The system will power off now!
+
+
+Broadcast message from root@jenkins-server.com (Thu 2025-08-07 10:12:05 UTC):
+
+The system will power off now!
+
+Connection to ec2-18-232-99-31.compute-1.amazonaws.com closed by remote host.
+Connection to ec2-18-232-99-31.compute-1.amazonaws.com closed.
+PS C:\Users\10840056\Downloads> ssh -i "jenkins-ishanjit.pem" ec2-user@ec2-18-232-99-31.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Thu Aug  7 09:08:37 2025 from 103.244.155.144
+[ec2-user@jenkins-server ~]$ sudo su -
+Last login: Thu Aug  7 09:10:53 UTC 2025 on pts/1
+[root@jenkins-server ~]# client_loop: send disconnect: Connection reset
+PS C:\Users\10840056\Downloads> ssh -i "jenkins-ishanjit.pem" ec2-user@ec2-18-232-99-31.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Thu Aug  7 10:12:33 2025 from 103.244.155.144
+[ec2-user@jenkins-server ~]$ sudo su -
+Last login: Thu Aug  7 10:12:40 UTC 2025 on pts/1
+[root@jenkins-server ~]# cd ..
+[root@jenkins-server /]# cd
+[root@jenkins-server ~]# yum install git -y
+Last metadata expiration check: 4:08:49 ago on Thu Aug  7 07:20:07 2025.
+Dependencies resolved.
+========================================================================================================================
+ Package                       Architecture        Version                               Repository                Size
+========================================================================================================================
+Installing:
+ git                           x86_64              2.50.1-1.amzn2023.0.1                 amazonlinux               53 k
+Installing dependencies:
+ git-core                      x86_64              2.50.1-1.amzn2023.0.1                 amazonlinux              4.9 M
+ git-core-doc                  noarch              2.50.1-1.amzn2023.0.1                 amazonlinux              2.8 M
+ perl-Error                    noarch              1:0.17029-5.amzn2023.0.2              amazonlinux               41 k
+ perl-File-Find                noarch              1.37-477.amzn2023.0.7                 amazonlinux               25 k
+ perl-Git                      noarch              2.50.1-1.amzn2023.0.1                 amazonlinux               41 k
+ perl-TermReadKey              x86_64              2.38-9.amzn2023.0.2                   amazonlinux               36 k
+ perl-lib                      x86_64              0.65-477.amzn2023.0.7                 amazonlinux               15 k
+
+Transaction Summary
+========================================================================================================================
+Install  8 Packages
+
+Total download size: 7.9 M
+Installed size: 41 M
+Downloading Packages:
+(1/8): git-2.50.1-1.amzn2023.0.1.x86_64.rpm                                             970 kB/s |  53 kB     00:00
+(2/8): perl-Error-0.17029-5.amzn2023.0.2.noarch.rpm                                     1.5 MB/s |  41 kB     00:00
+(3/8): perl-File-Find-1.37-477.amzn2023.0.7.noarch.rpm                                  832 kB/s |  25 kB     00:00
+(4/8): git-core-doc-2.50.1-1.amzn2023.0.1.noarch.rpm                                     20 MB/s | 2.8 MB     00:00
+(5/8): perl-Git-2.50.1-1.amzn2023.0.1.noarch.rpm                                        1.2 MB/s |  41 kB     00:00
+(6/8): perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64.rpm                                  1.6 MB/s |  36 kB     00:00
+(7/8): perl-lib-0.65-477.amzn2023.0.7.x86_64.rpm                                        578 kB/s |  15 kB     00:00
+(8/8): git-core-2.50.1-1.amzn2023.0.1.x86_64.rpm                                         25 MB/s | 4.9 MB     00:00
+------------------------------------------------------------------------------------------------------------------------
+Total                                                                                    34 MB/s | 7.9 MB     00:00
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                1/1
+  Installing       : git-core-2.50.1-1.amzn2023.0.1.x86_64                                                          1/8
+  Installing       : git-core-doc-2.50.1-1.amzn2023.0.1.noarch                                                      2/8
+  Installing       : perl-lib-0.65-477.amzn2023.0.7.x86_64                                                          3/8
+  Installing       : perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                                                    4/8
+  Installing       : perl-File-Find-1.37-477.amzn2023.0.7.noarch                                                    5/8
+  Installing       : perl-Error-1:0.17029-5.amzn2023.0.2.noarch                                                     6/8
+  Installing       : perl-Git-2.50.1-1.amzn2023.0.1.noarch                                                          7/8
+  Installing       : git-2.50.1-1.amzn2023.0.1.x86_64                                                               8/8
+  Running scriptlet: git-2.50.1-1.amzn2023.0.1.x86_64                                                               8/8
+  Verifying        : git-2.50.1-1.amzn2023.0.1.x86_64                                                               1/8
+  Verifying        : git-core-2.50.1-1.amzn2023.0.1.x86_64                                                          2/8
+  Verifying        : git-core-doc-2.50.1-1.amzn2023.0.1.noarch                                                      3/8
+  Verifying        : perl-Error-1:0.17029-5.amzn2023.0.2.noarch                                                     4/8
+  Verifying        : perl-File-Find-1.37-477.amzn2023.0.7.noarch                                                    5/8
+  Verifying        : perl-Git-2.50.1-1.amzn2023.0.1.noarch                                                          6/8
+  Verifying        : perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                                                    7/8
+  Verifying        : perl-lib-0.65-477.amzn2023.0.7.x86_64                                                          8/8
+
+Installed:
+  git-2.50.1-1.amzn2023.0.1.x86_64                            git-core-2.50.1-1.amzn2023.0.1.x86_64
+  git-core-doc-2.50.1-1.amzn2023.0.1.noarch                   perl-Error-1:0.17029-5.amzn2023.0.2.noarch
+  perl-File-Find-1.37-477.amzn2023.0.7.noarch                 perl-Git-2.50.1-1.amzn2023.0.1.noarch
+  perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                 perl-lib-0.65-477.amzn2023.0.7.x86_64
+
+Complete!
+[root@jenkins-server ~]# client_loop: send disconnect: Connection reset
+PS C:\Users\10840056\Downloads>

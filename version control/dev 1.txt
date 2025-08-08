@@ -1,0 +1,634 @@
+[ec2-user@ip-172-31-33-175 ~]$ sudo su -
+[root@ip-172-31-33-175 ~]#  hostnamectl set-hostname dev-one-server.example.com
+[root@ip-172-31-33-175 ~]# bash
+[root@dev-one-server ~]# hostname
+dev-one-server.example.com
+[root@dev-one-server ~]# ip a s
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute
+       valid_lft forever preferred_lft forever
+2: enX0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc fq_codel state UP group default qlen 1000
+    link/ether 0e:1f:43:83:eb:df brd ff:ff:ff:ff:ff:ff
+    altname eni-02f2b2c53735e0a5b
+    altname device-number-0.0
+    inet 172.31.33.175/20 metric 512 brd 172.31.47.255 scope global dynamic enX0
+       valid_lft 1943sec preferred_lft 1943sec
+    inet6 fe80::c1f:43ff:fe83:ebdf/64 scope link proto kernel_ll
+       valid_lft forever preferred_lft forever
+[root@dev-one-server ~]# vim /etc/hosts
+[root@dev-one-server ~]# tten
+[root@dev-one-server ~]# ping dev-one-server.example.com
+PING git-server.example.com (172.31.35.183) 56(84) bytes of data.
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=1 ttl=127 time=2.18 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=2 ttl=127 time=0.539 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=3 ttl=127 time=0.719 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=4 ttl=127 time=0.698 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=5 ttl=127 time=1.04 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=6 ttl=127 time=0.532 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=7 ttl=127 time=1.22 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=8 ttl=127 time=0.861 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=9 ttl=127 time=0.521 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=10 ttl=127 time=0.518 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=11 ttl=127 time=0.757 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=12 ttl=127 time=0.820 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=13 ttl=127 time=0.975 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=14 ttl=127 time=0.815 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=15 ttl=127 time=0.864 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=16 ttl=127 time=1.30 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=17 ttl=127 time=0.801 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=18 ttl=127 time=1.23 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=19 ttl=127 time=0.583 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=20 ttl=127 time=0.520 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=21 ttl=127 time=0.844 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=22 ttl=127 time=0.510 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=23 ttl=127 time=0.560 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=24 ttl=127 time=0.987 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=25 ttl=127 time=0.779 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=26 ttl=127 time=0.927 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=27 ttl=127 time=0.569 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=28 ttl=127 time=0.602 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=29 ttl=127 time=0.770 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=30 ttl=127 time=0.726 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=31 ttl=127 time=0.564 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=32 ttl=127 time=0.534 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=33 ttl=127 time=0.760 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=34 ttl=127 time=0.980 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=35 ttl=127 time=1.06 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=36 ttl=127 time=0.574 ms
+64 bytes from git-server.example.com (172.31.35.183): icmp_seq=37 ttl=127 time=0.549 ms
+^Z
+[1]+  Stopped                 ping dev-one-server.example.com
+[root@dev-one-server ~]# cat /etc/os-release
+NAME="Amazon Linux"
+VERSION="2023"
+ID="amzn"
+ID_LIKE="fedora"
+VERSION_ID="2023"
+PLATFORM_ID="platform:al2023"
+PRETTY_NAME="Amazon Linux 2023.8.20250804"
+ANSI_COLOR="0;33"
+CPE_NAME="cpe:2.3:o:amazon:amazon_linux:2023"
+HOME_URL="https://aws.amazon.com/linux/amazon-linux-2023/"
+DOCUMENTATION_URL="https://docs.aws.amazon.com/linux/"
+SUPPORT_URL="https://aws.amazon.com/premiumsupport/"
+BUG_REPORT_URL="https://github.com/amazonlinux/amazon-linux-2023"
+VENDOR_NAME="AWS"
+VENDOR_URL="https://aws.amazon.com/"
+SUPPORT_END="2029-06-30"
+[root@dev-one-server ~]# yum install git -y
+Amazon Linux 2023 Kernel Livepatch repository                                                        132 kB/s |  19 kB     00:00
+Last metadata expiration check: 0:00:01 ago on Wed Aug  6 06:31:19 2025.
+Dependencies resolved.
+=====================================================================================================================================
+ Package                          Architecture           Version                                   Repository                   Size
+=====================================================================================================================================
+Installing:
+ git                              x86_64                 2.50.1-1.amzn2023.0.1                     amazonlinux                  53 k
+Installing dependencies:
+ git-core                         x86_64                 2.50.1-1.amzn2023.0.1                     amazonlinux                 4.9 M
+ git-core-doc                     noarch                 2.50.1-1.amzn2023.0.1                     amazonlinux                 2.8 M
+ perl-Error                       noarch                 1:0.17029-5.amzn2023.0.2                  amazonlinux                  41 k
+ perl-File-Find                   noarch                 1.37-477.amzn2023.0.7                     amazonlinux                  25 k
+ perl-Git                         noarch                 2.50.1-1.amzn2023.0.1                     amazonlinux                  41 k
+ perl-TermReadKey                 x86_64                 2.38-9.amzn2023.0.2                       amazonlinux                  36 k
+ perl-lib                         x86_64                 0.65-477.amzn2023.0.7                     amazonlinux                  15 k
+
+Transaction Summary
+=====================================================================================================================================
+Install  8 Packages
+
+Total download size: 7.9 M
+Installed size: 41 M
+Downloading Packages:
+(1/8): git-core-doc-2.50.1-1.amzn2023.0.1.noarch.rpm                                                  44 MB/s | 2.8 MB     00:00
+(2/8): git-2.50.1-1.amzn2023.0.1.x86_64.rpm                                                          766 kB/s |  53 kB     00:00
+(3/8): perl-Error-0.17029-5.amzn2023.0.2.noarch.rpm                                                  1.8 MB/s |  41 kB     00:00
+(4/8): perl-File-Find-1.37-477.amzn2023.0.7.noarch.rpm                                               1.1 MB/s |  25 kB     00:00
+(5/8): git-core-2.50.1-1.amzn2023.0.1.x86_64.rpm                                                      41 MB/s | 4.9 MB     00:00
+(6/8): perl-Git-2.50.1-1.amzn2023.0.1.noarch.rpm                                                     1.2 MB/s |  41 kB     00:00
+(7/8): perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64.rpm                                               1.1 MB/s |  36 kB     00:00
+(8/8): perl-lib-0.65-477.amzn2023.0.7.x86_64.rpm                                                     809 kB/s |  15 kB     00:00
+-------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                 48 MB/s | 7.9 MB     00:00
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                             1/1
+  Installing       : git-core-2.50.1-1.amzn2023.0.1.x86_64                                                                       1/8
+  Installing       : git-core-doc-2.50.1-1.amzn2023.0.1.noarch                                                                   2/8
+  Installing       : perl-lib-0.65-477.amzn2023.0.7.x86_64                                                                       3/8
+  Installing       : perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                                                                 4/8
+  Installing       : perl-File-Find-1.37-477.amzn2023.0.7.noarch                                                                 5/8
+  Installing       : perl-Error-1:0.17029-5.amzn2023.0.2.noarch                                                                  6/8
+  Installing       : perl-Git-2.50.1-1.amzn2023.0.1.noarch                                                                       7/8
+  Installing       : git-2.50.1-1.amzn2023.0.1.x86_64                                                                            8/8
+  Running scriptlet: git-2.50.1-1.amzn2023.0.1.x86_64                                                                            8/8
+  Verifying        : git-2.50.1-1.amzn2023.0.1.x86_64                                                                            1/8
+  Verifying        : git-core-2.50.1-1.amzn2023.0.1.x86_64                                                                       2/8
+  Verifying        : git-core-doc-2.50.1-1.amzn2023.0.1.noarch                                                                   3/8
+  Verifying        : perl-Error-1:0.17029-5.amzn2023.0.2.noarch                                                                  4/8
+  Verifying        : perl-File-Find-1.37-477.amzn2023.0.7.noarch                                                                 5/8
+  Verifying        : perl-Git-2.50.1-1.amzn2023.0.1.noarch                                                                       6/8
+  Verifying        : perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                                                                 7/8
+  Verifying        : perl-lib-0.65-477.amzn2023.0.7.x86_64                                                                       8/8
+
+Installed:
+  git-2.50.1-1.amzn2023.0.1.x86_64            git-core-2.50.1-1.amzn2023.0.1.x86_64       git-core-doc-2.50.1-1.amzn2023.0.1.noarch
+  perl-Error-1:0.17029-5.amzn2023.0.2.noarch  perl-File-Find-1.37-477.amzn2023.0.7.noarch perl-Git-2.50.1-1.amzn2023.0.1.noarch
+  perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64 perl-lib-0.65-477.amzn2023.0.7.x86_64
+
+Complete!
+[root@dev-one-server ~]# rpmquery git
+git-2.50.1-1.amzn2023.0.1.x86_64
+[root@dev-one-server ~]# mkdir /dev1-code
+[root@dev-one-server ~]# cd /dev1-code
+[root@dev-one-server dev1-code]# git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+Initialized empty Git repository in /dev1-code/.git/
+[root@dev-one-server dev1-code]# cd
+[root@dev-one-server ~]# l.
+.bash_logout  .bash_profile  .bashrc  .cshrc  .ssh  .tcshrc  .viminfo
+[root@dev-one-server ~]# cd .ssh/
+[root@dev-one-server .ssh]# ll
+total 4
+-rw-------. 1 root root 554 Aug  6 04:50 authorized_keys
+[root@dev-one-server .ssh]# cd
+[root@dev-one-server ~]# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /root/.ssh/id_rsa
+Your public key has been saved in /root/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:fADq8B0JwEOjJb6QFIKdmx3OpBv2uSC2UWI326BLItY root@dev-one-server.example.com
+The key's randomart image is:
++---[RSA 3072]----+
+|+**o. .          |
+|===.oo o         |
+|+..X..o .        |
+|.oBO+. o .       |
+|.o*+B.. S .      |
+|+*oEo.   .       |
+|*.+. .           |
+| o  .            |
+|                 |
++----[SHA256]-----+
+[root@dev-one-server ~]# ssh-copy-id root@172.31.35.183
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/root/.ssh/id_rsa.pub"
+The authenticity of host '172.31.35.183 (172.31.35.183)' can't be established.
+ED25519 key fingerprint is SHA256:acOd9Z5/GdfAaG7+by7sZMU/KYAvnyvVLIVvATX6ZBY.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+root@172.31.35.183's password:
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'root@172.31.35.183'"
+and check to make sure that only the key(s) you wanted were added.
+
+[root@dev-one-server ~]# history
+    1  hostname
+    2  ip a s
+    3  vim /etc/hosts
+    4  ping dev-one-server.example.com
+    5  cat /etc/os-release
+    6  yum install git -y
+    7  rpmquery git
+    8  mkdir /dev1-code
+    9  cd /dev1-code
+   10  git init
+   11  cd
+   12  l.
+   13  cd .ssh/
+   14  ll
+   15  cd
+   16  ssh-keygen
+   17  ssh-copy-id root@172.31.35.183
+   18  history
+[root@dev-one-server ~]# cd .ssh/
+[root@dev-one-server .ssh]# cat authorized_keys
+no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command="echo 'Please login as the user \"ec2-user\" rather than the user \"root\".';echo;sleep 10;exit 142" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEFmCoc54r8d3RQvJ0uvn80vkDOa/zPynBg+kBhU3L4hP4jEmm6bf5eeninEGnraW3KkrY7U6MEWS2qACmj0tkx4+TK5qK9CpMgh7CG7ghIvdhkBPRrvEoU+/N9xvNvxt7hF4c61su3nUlUJcj7ISagGwbXa4YG7ezJn1BfWMs0N24G68tcN9r4lDcCYAfL352G/wdoqqVPsfgsSAgvaCzzWGHRLBvBbeYBufc0EnUwPjnm1SOnxe8CmgG1aW9hGCIaAm5yi7O1T/LS++2tGkgptqWpG8lS+HT0hJU7BIXyeMXVJ+7NFv4baZBcQ8OhsSALtIGdM+ZnoH8ZRWN6Acb ishan1
+[root@dev-one-server .ssh]# client_loop: send disconnect: Connection reset
+PS C:\Users\10840056\Downloads> history
+
+  Id CommandLine
+  -- -----------
+   1 cd \Downloads
+   2 cd C:\Users\10840056\Downloads
+   3 clear
+   4 ssh -i "ishan1.pem" ec2-user@ec2-54-90-226-226.compute-1.amazonaws.com
+
+
+PS C:\Users\10840056\Downloads>
+PS C:\Users\10840056\Downloads>
+PS C:\Users\10840056\Downloads>
+PS C:\Users\10840056\Downloads>
+PS C:\Users\10840056\Downloads>
+PS C:\Users\10840056\Downloads>
+PS C:\Users\10840056\Downloads> ssh -i "ishan1.pem" ec2-user@ec2-13-217-109-80.compute-1.amazonaws.com
+The authenticity of host 'ec2-13-217-109-80.compute-1.amazonaws.com (13.217.109.80)' can't be established.
+ED25519 key fingerprint is SHA256:gLtBDc7wvf//REPT07uicMI23R4j7fjrNBmjj9wLvyo.
+This host key is known by the following other names/addresses:
+    C:\Users\10840056/.ssh/known_hosts:5: ec2-54-90-226-226.compute-1.amazonaws.com
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-13-217-109-80.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Wed Aug  6 06:09:23 2025 from 103.244.155.144
+[ec2-user@dev-one-server ~]$ sudo su -
+Last login: Wed Aug  6 06:13:16 UTC 2025 on pts/1
+[root@dev-one-server ~]# cd /dev-one
+-bash: cd: /dev-one: No such file or directory
+[root@dev-one-server ~]# cd /dev-one-code
+-bash: cd: /dev-one-code: No such file or directory
+[root@dev-one-server ~]# ls
+[root@dev-one-server ~]# ll
+total 0
+[root@dev-one-server ~]# pwd
+/root
+[root@dev-one-server ~]# cd /dev-one-code
+-bash: cd: /dev-one-code: No such file or directory
+[root@dev-one-server ~]# ls
+[root@dev-one-server ~]# l .
+-bash: l: command not found
+[root@dev-one-server ~]# l.
+.bash_history  .bash_logout  .bash_profile  .bashrc  .cshrc  .ssh  .tcshrc  .viminfo
+[root@dev-one-server ~]# cd
+[root@dev-one-server ~]# cd ..
+[root@dev-one-server /]# ls
+bin  boot  dev  dev1-code  etc  home  lib  lib64  local  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+[root@dev-one-server /]# cd /dev1-code
+[root@dev-one-server dev1-code]# ll
+total 0
+[root@dev-one-server dev1-code]# pwd
+/dev1-code
+[root@dev-one-server dev1-code]# ls -a
+.  ..  .git
+[root@dev-one-server dev1-code]# cat > index.html
+Hii Ishanjit dev1.
+^[
+nwuwhjknsihs
+
+
+
+
+Z^Z
+[1]+  Stopped                 cat > index.html
+[root@dev-one-server dev1-code]# cat index.html
+Hii Ishanjit dev1.
+
+wuwhjknsihs
+
+
+
+
+[root@dev-one-server dev1-code]# cat > index.html
+^Z
+[2]+  Stopped                 cat > index.html
+[root@dev-one-server dev1-code]# cat index.html
+[root@dev-one-server dev1-code]# cat > index.html
+Hii ishanjit dev 1^Z
+[3]+  Stopped                 cat > index.html
+[root@dev-one-server dev1-code]# cat index.html
+[root@dev-one-server dev1-code]# cat > index.html
+hii ishanjit dev 1^Z
+[4]+  Stopped                 cat > index.html
+[root@dev-one-server dev1-code]# cat index.html
+hii ishanjit dev 1[root@dev-one-server dev1-code]# cat index.html
+hii ishanjit dev 1[root@dev-one-server dev1-code]# git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        index.html
+
+nothing added to commit but untracked files present (use "git add" to track)
+[root@dev-one-server dev1-code]# git commit -m first commit
+error: pathspec 'commit' did not match any file(s) known to git
+[root@dev-one-server dev1-code]# client_loop: send disconnect: Connection reset
+PS C:\Users\10840056\Downloads> ssh -i "ishan1.pem" ec2-user@ec2-13-217-109-80.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Wed Aug  6 08:45:41 2025 from 103.244.155.144
+[ec2-user@dev-one-server ~]$ cd ..
+[ec2-user@dev-one-server home]$ cd /dev1-code
+[ec2-user@dev-one-server dev1-code]$ cat index.html
+hii ishanjit dev 1[ec2-user@dev-one-server dev1-code]$ cat > index.html
+-bash: index.html: Permission denied
+[ec2-user@dev-one-server dev1-code]$ sudo su -
+Last login: Wed Aug  6 08:47:00 UTC 2025 on pts/1
+[root@dev-one-server ~]# cd ..
+[root@dev-one-server /]# cd dev1-code
+[root@dev-one-server dev1-code]# cat index.html
+hii ishanjit dev 1[root@dev-one-server dev1-code]# cat > index.html
+^Z
+[1]+  Stopped                 cat > index.html
+[root@dev-one-server dev1-code]# cat index.html
+[root@dev-one-server dev1-code]# cat > index.html
+ishanjit dev 1^Z
+[2]+  Stopped                 cat > index.html
+[root@dev-one-server dev1-code]# cat index.html
+[root@dev-one-server dev1-code]# cat > index.html
+ishanjit dev 1^C
+[root@dev-one-server dev1-code]# cat index.html
+ishanjit dev 1[root@dev-one-server dev1-code]# git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        index.html
+
+nothing added to commit but untracked files present (use "git add" to track)
+[root@dev-one-server dev1-code]# git commit -m first commit
+error: pathspec 'commit' did not match any file(s) known to git
+[root@dev-one-server dev1-code]# git commit -m firstcommit index.html
+error: pathspec 'index.html' did not match any file(s) known to git
+[root@dev-one-server dev1-code]# git commit -m firstcommit
+On branch master
+
+Initial commit
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        index.html
+
+nothing added to commit but untracked files present (use "git add" to track)
+[root@dev-one-server dev1-code]# git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        index.html
+
+nothing added to commit but untracked files present (use "git add" to track)
+[root@dev-one-server dev1-code]# git add index.html
+[root@dev-one-server dev1-code]# git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   index.html
+
+[root@dev-one-server dev1-code]# git commit -m firstcommit
+[master (root-commit) 07ed9be] firstcommit
+ Committer: root <root@dev-one-server.example.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+ create mode 100644 index.html
+[root@dev-one-server dev1-code]# git remote -v
+[root@dev-one-server dev1-code]# git remote add origin root@172.31.35.183:/code
+[root@dev-one-server dev1-code]# git push origin master
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 229 bytes | 229.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To 172.31.35.183:/code
+ * [new branch]      master -> master
+[root@dev-one-server dev1-code]# git status
+On branch master
+nothing to commit, working tree clean
+[root@dev-one-server dev1-code]# git log
+commit 07ed9be67ebba74fd924ddb2a62efdaac36f8a45 (HEAD -> master, origin/master)
+Author: root <root@dev-one-server.example.com>
+Date:   Wed Aug 6 09:45:10 2025 +0000
+
+    firstcommit
+[root@dev-one-server dev1-code]# vim index.html
+[root@dev-one-server dev1-code]# git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[root@dev-one-server dev1-code]# git add .
+[root@dev-one-server dev1-code]# git push origin master
+Everything up-to-date
+[root@dev-one-server dev1-code]# git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   index.html
+
+[root@dev-one-server dev1-code]# git log
+commit 07ed9be67ebba74fd924ddb2a62efdaac36f8a45 (HEAD -> master, origin/master)
+Author: root <root@dev-one-server.example.com>
+Date:   Wed Aug 6 09:45:10 2025 +0000
+
+    firstcommit
+[root@dev-one-server dev1-code]# git commit -m secondcommit
+[master 0370553] secondcommit
+ Committer: root <root@dev-one-server.example.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+[root@dev-one-server dev1-code]# git push origin master
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 283 bytes | 283.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To 172.31.35.183:/code
+   07ed9be..0370553  master -> master
+[root@dev-one-server dev1-code]# git status
+On branch master
+nothing to commit, working tree clean
+[root@dev-one-server dev1-code]# git log
+commit 0370553d32c50a507936ed312fc8ee9448a5eb73 (HEAD -> master, origin/master)
+Author: root <root@dev-one-server.example.com>
+Date:   Wed Aug 6 09:57:30 2025 +0000
+
+    secondcommit
+
+commit 07ed9be67ebba74fd924ddb2a62efdaac36f8a45
+Author: root <root@dev-one-server.example.com>
+Date:   Wed Aug 6 09:45:10 2025 +0000
+
+    firstcommit
+[root@dev-one-server dev1-code]# git log
+commit 0370553d32c50a507936ed312fc8ee9448a5eb73 (HEAD -> master, origin/master)
+Author: root <root@dev-one-server.example.com>
+Date:   Wed Aug 6 09:57:30 2025 +0000
+
+    secondcommit
+
+commit 07ed9be67ebba74fd924ddb2a62efdaac36f8a45
+Author: root <root@dev-one-server.example.com>
+Date:   Wed Aug 6 09:45:10 2025 +0000
+
+    firstcommit
+[root@dev-one-server dev1-code]# git status
+On branch master
+nothing to commit, working tree clean
+[root@dev-one-server dev1-code]# git pull origin master
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 287 bytes | 287.00 KiB/s, done.
+From 172.31.35.183:/code
+ * branch            master     -> FETCH_HEAD
+   0370553..b91c7cd  master     -> origin/master
+Updating 0370553..b91c7cd
+Fast-forward
+ index.html | 5 +++++
+ 1 file changed, 5 insertions(+)
+[root@dev-one-server dev1-code]# cat index.html
+ishanjit dev 1
+#############################################
+
+second commit
+
+################################################
+
+
+dev 2 first commit
+
+#################################################
+[root@dev-one-server dev1-code]# vim index.html
+[root@dev-one-server dev1-code]# git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[root@dev-one-server dev1-code]# git add .
+[root@dev-one-server dev1-code]# git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   index.html
+
+[root@dev-one-server dev1-code]# git commit -m "third commit from dev 1"
+[master bdabfb3] third commit from dev 1
+ Committer: root <root@dev-one-server.example.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+)
+[root@dev-one-server dev1-code]# git log
+commit bdabfb3d9363aa198cec6943e87b8e22a24da91f (HEAD -> master)
+Author: root <root@dev-one-server.example.com>
+Date:   Wed Aug 6 10:39:45 2025 +0000
+
+    third commit from dev 1
+
+commit b91c7cd3aa2ae87729c7d17e12d06c448343b32e (origin/master)
+Author: root <root@dev-two-server.example.com>
+Date:   Wed Aug 6 10:07:38 2025 +0000
+
+    dev2_first_commit
+
+commit 0370553d32c50a507936ed312fc8ee9448a5eb73
+Author: root <root@dev-one-server.example.com>
+Date:   Wed Aug 6 09:57:30 2025 +0000
+
+    secondcommit
+
+commit 07ed9be67ebba74fd924ddb2a62efdaac36f8a45
+Author: root <root@dev-one-server.example.com>
+Date:   Wed Aug 6 09:45:10 2025 +0000
+
+    firstcommit
+[root@dev-one-server dev1-code]# git status
+On branch master
+nothing to commit, working tree clean
+[root@dev-one-server dev1-code]# git push orgin master
+fatal: 'orgin' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+[root@dev-one-server dev1-code]# cat index.html
+ishanjit dev 1
+#############################################
+
+second commit
+
+################################################
+
+
+dev 2 first commit
+
+#################################################
+3rd commit in dev 1 server
+
+###################################################
+[root@dev-one-server dev1-code]# client_loop: send disconnect: Connection reset
+PS C:\Users\10840056\Downloads>

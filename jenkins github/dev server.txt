@@ -1,0 +1,432 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\10840056> cd C:\Users\10840056\Downloads
+PS C:\Users\10840056\Downloads> ssh -i "jenkins-ishanjit.pem" ec2-user@ec2-34-228-167-127.compute-1.amazonaws.com
+The authenticity of host 'ec2-34-228-167-127.compute-1.amazonaws.com (34.228.167.127)' can't be established.
+ED25519 key fingerprint is SHA256:RUryg9Czf+QDOr9Aol2nMBeLZbHYr9Rqx3kjtRoDsyE.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-34-228-167-127.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+[ec2-user@ip-172-31-21-139 ~]$ sudo su -
+[root@ip-172-31-21-139 ~]# hostnamectl set-hostname dev-server.com
+[root@ip-172-31-21-139 ~]# bash
+[root@dev-server ~]# yum update -y
+Amazon Linux 2023 Kernel Livepatch repository                                           176 kB/s |  19 kB     00:00
+Dependencies resolved.
+Nothing to do.
+Complete!
+[root@dev-server ~]#
+Broadcast message from root@localhost (Thu 2025-08-07 07:32:51 UTC):
+
+The system will power off now!
+
+
+Broadcast message from root@localhost (Thu 2025-08-07 07:32:51 UTC):
+
+The system will power off now!
+
+Connection to ec2-34-228-167-127.compute-1.amazonaws.com closed by remote host.
+Connection to ec2-34-228-167-127.compute-1.amazonaws.com closed.
+PS C:\Users\10840056\Downloads> ssh -i "jenkins-ishanjit.pem" ec2-user@ec2-54-145-6-12.compute-1.amazonaws.com
+The authenticity of host 'ec2-54-145-6-12.compute-1.amazonaws.com (54.145.6.12)' can't be established.
+ED25519 key fingerprint is SHA256:RUryg9Czf+QDOr9Aol2nMBeLZbHYr9Rqx3kjtRoDsyE.
+This host key is known by the following other names/addresses:
+    C:\Users\10840056/.ssh/known_hosts:12: ec2-34-228-167-127.compute-1.amazonaws.com
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-54-145-6-12.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Thu Aug  7 07:11:29 2025 from 103.244.155.144
+[ec2-user@dev-server ~]$ sudo su -
+Last login: Thu Aug  7 07:11:49 UTC 2025 on pts/1
+[root@dev-server ~]# bash
+[root@dev-server ~]# client_loop: send disconnect: Connection reset
+PS C:\Users\10840056\Downloads> ssh -i "jenkins-ishanjit.pem" ec2-user@ec2-54-145-6-12.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Thu Aug  7 08:27:07 2025 from 103.244.155.144
+[ec2-user@dev-server ~]$ sudo su -
+Last login: Thu Aug  7 08:27:15 UTC 2025 on pts/1
+[root@dev-server ~]# ls
+[root@dev-server ~]# ll
+total 0
+[root@dev-server ~]# cd
+[root@dev-server ~]# cd ..
+[root@dev-server /]# ls
+bin  boot  dev  etc  home  lib  lib64  local  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+[root@dev-server /]# mkdir /data
+[root@dev-server /]# cd /data/
+[root@dev-server data]# git init
+-bash: git: command not found
+[root@dev-server data]# cd ..
+[root@dev-server /]# yum install -y
+usage: yum install [-c [config file]] [-q] [-v] [--version] [--installroot [path]] [--nodocs] [--noplugins]
+                   [--enableplugin [plugin]] [--disableplugin [plugin]] [--releasever RELEASEVER] [--setopt SETOPTS]
+                   [--skip-broken] [-h] [--allowerasing] [-b | --nobest] [-C] [-R [minutes]] [-d [debug level]]
+                   [--debugsolver] [--showduplicates] [-e ERRORLEVEL] [--obsoletes]
+                   [--rpmverbosity [debug level name]] [-y] [--assumeno] [--enablerepo [repo]] [--disablerepo [repo] |
+                   --repo [repo]] [--enable | --disable] [-x [package]] [--disableexcludes [repo]]
+                   [--repofrompath [repo,path]] [--noautoremove] [--nogpgcheck] [--color COLOR] [--refresh] [-4] [-6]
+                   [--destdir DESTDIR] [--downloadonly] [--comment COMMENT] [--bugfix] [--enhancement] [--newpackage]
+                   [--security] [--advisory ADVISORY] [--bz BUGZILLA] [--cve CVES]
+                   [--sec-severity {Critical,Important,Moderate,Medium,Low}] [--forcearch ARCH]
+                   PACKAGE [PACKAGE ...]
+yum install: error: the following arguments are required: PACKAGE
+[root@dev-server /]# yum install git -y
+Last metadata expiration check: 3:05:45 ago on Thu Aug  7 07:13:49 2025.
+Dependencies resolved.
+========================================================================================================================
+ Package                       Architecture        Version                               Repository                Size
+========================================================================================================================
+Installing:
+ git                           x86_64              2.50.1-1.amzn2023.0.1                 amazonlinux               53 k
+Installing dependencies:
+ git-core                      x86_64              2.50.1-1.amzn2023.0.1                 amazonlinux              4.9 M
+ git-core-doc                  noarch              2.50.1-1.amzn2023.0.1                 amazonlinux              2.8 M
+ perl-Error                    noarch              1:0.17029-5.amzn2023.0.2              amazonlinux               41 k
+ perl-File-Find                noarch              1.37-477.amzn2023.0.7                 amazonlinux               25 k
+ perl-Git                      noarch              2.50.1-1.amzn2023.0.1                 amazonlinux               41 k
+ perl-TermReadKey              x86_64              2.38-9.amzn2023.0.2                   amazonlinux               36 k
+ perl-lib                      x86_64              0.65-477.amzn2023.0.7                 amazonlinux               15 k
+
+Transaction Summary
+========================================================================================================================
+Install  8 Packages
+
+Total download size: 7.9 M
+Installed size: 41 M
+Downloading Packages:
+(1/8): git-2.50.1-1.amzn2023.0.1.x86_64.rpm                                             1.5 MB/s |  53 kB     00:00
+(2/8): perl-Error-0.17029-5.amzn2023.0.2.noarch.rpm                                     1.8 MB/s |  41 kB     00:00
+(3/8): git-core-doc-2.50.1-1.amzn2023.0.1.noarch.rpm                                     31 MB/s | 2.8 MB     00:00
+(4/8): git-core-2.50.1-1.amzn2023.0.1.x86_64.rpm                                         39 MB/s | 4.9 MB     00:00
+(5/8): perl-File-Find-1.37-477.amzn2023.0.7.noarch.rpm                                  362 kB/s |  25 kB     00:00
+(6/8): perl-Git-2.50.1-1.amzn2023.0.1.noarch.rpm                                        1.0 MB/s |  41 kB     00:00
+(7/8): perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64.rpm                                  1.3 MB/s |  36 kB     00:00
+(8/8): perl-lib-0.65-477.amzn2023.0.7.x86_64.rpm                                        474 kB/s |  15 kB     00:00
+------------------------------------------------------------------------------------------------------------------------
+Total                                                                                    41 MB/s | 7.9 MB     00:00
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                1/1
+  Installing       : git-core-2.50.1-1.amzn2023.0.1.x86_64                                                          1/8
+  Installing       : git-core-doc-2.50.1-1.amzn2023.0.1.noarch                                                      2/8
+  Installing       : perl-lib-0.65-477.amzn2023.0.7.x86_64                                                          3/8
+  Installing       : perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                                                    4/8
+  Installing       : perl-File-Find-1.37-477.amzn2023.0.7.noarch                                                    5/8
+  Installing       : perl-Error-1:0.17029-5.amzn2023.0.2.noarch                                                     6/8
+  Installing       : perl-Git-2.50.1-1.amzn2023.0.1.noarch                                                          7/8
+  Installing       : git-2.50.1-1.amzn2023.0.1.x86_64                                                               8/8
+  Running scriptlet: git-2.50.1-1.amzn2023.0.1.x86_64                                                               8/8
+  Verifying        : git-2.50.1-1.amzn2023.0.1.x86_64                                                               1/8
+  Verifying        : git-core-2.50.1-1.amzn2023.0.1.x86_64                                                          2/8
+  Verifying        : git-core-doc-2.50.1-1.amzn2023.0.1.noarch                                                      3/8
+  Verifying        : perl-Error-1:0.17029-5.amzn2023.0.2.noarch                                                     4/8
+  Verifying        : perl-File-Find-1.37-477.amzn2023.0.7.noarch                                                    5/8
+  Verifying        : perl-Git-2.50.1-1.amzn2023.0.1.noarch                                                          6/8
+  Verifying        : perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                                                    7/8
+  Verifying        : perl-lib-0.65-477.amzn2023.0.7.x86_64                                                          8/8
+
+Installed:
+  git-2.50.1-1.amzn2023.0.1.x86_64                            git-core-2.50.1-1.amzn2023.0.1.x86_64
+  git-core-doc-2.50.1-1.amzn2023.0.1.noarch                   perl-Error-1:0.17029-5.amzn2023.0.2.noarch
+  perl-File-Find-1.37-477.amzn2023.0.7.noarch                 perl-Git-2.50.1-1.amzn2023.0.1.noarch
+  perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                 perl-lib-0.65-477.amzn2023.0.7.x86_64
+
+Complete!
+[root@dev-server /]# cd /data/
+[root@dev-server data]# git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+Initialized empty Git repository in /data/.git/
+[root@dev-server data]# cat > ishanjit.html
+hiii ishanjit dev one^C
+[root@dev-server data]# cd
+[root@dev-server ~]# cd /data/
+[root@dev-server data]# cd .ssh/
+-bash: cd: .ssh/: No such file or directory
+[root@dev-server data]# cd
+[root@dev-server ~]# cd .ssh/
+[root@dev-server .ssh]# ls
+authorized_keys
+[root@dev-server .ssh]# ll
+total 4
+-rw-------. 1 root root 564 Aug  7 07:06 authorized_keys
+[root@dev-server .ssh]# ssh key-gen
+ssh: Could not resolve hostname key-gen: Name or service not known
+[root@dev-server .ssh]# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /root/.ssh/id_rsa
+Your public key has been saved in /root/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:IljuDpbu/O1/YF1ic3gvDR3ULF0YRhiSmws8gB6O/sw root@dev-server.com
+The key's randomart image is:
++---[RSA 3072]----+
+|     .    ...==*o|
+|    o .   ....+ +|
+|   +.. o   + . o |
+|  .+o   + B = .  |
+| .. o . S= B +   |
+|  .o . .o o . o  |
+|  ++.  . .   .   |
+| + oE.    .      |
+| .+.o.o...       |
++----[SHA256]-----+
+[root@dev-server .ssh]#
+[root@dev-server .ssh]# ll
+total 12
+-rw-------. 1 root root  564 Aug  7 07:06 authorized_keys
+-rw-------. 1 root root 2602 Aug  7 10:26 id_rsa
+-rw-r--r--. 1 root root  573 Aug  7 10:26 id_rsa.pub
+[root@dev-server .ssh]# cat id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC0eh/svawEOfBhlvyaCjE9Tpr6SxQbP1fpHrFsjlOLxykKHfUQD4/qzn4Rv/iba57JFX1IttqPqVhe/pMmU+x25SOE3K0ASP5MxmleLlhAQOPxS67Tycqx+QHvYQN+yl9ATV11cU9LWlvGv27SlE7GojjvmnTNmo8gU+vDTlGBHFMAk0MgjpuzaeknCcy/O0tM8hBPRC2JLVYap7jgxImfapUuzWDsMQUHb0doU5TSI3RwUV5YOG1VaqzXUZMVgNBmzTLO96fjj8Fuupu3YX79WjkQIRY/wra+44VkyZY76ctJXZ4qBLFIeypbkSFBVgfXQwtpCXaw61vKxN18xTsExs0X/xzVh+0DPD1ZPstbc+4FqFNMR3jO3eemzTkRl8xVQVzpmq5IJ+fBvEaLFPI+fPPJy5lxKZw61ji9/wZKTmqiGKHmpe18julDtFB/lxGScdqbG/ir1YFrRiM7OcKNGqNhrKZSan27RdbjVLOJ/em7ldDWcMokf+UL2+ALmM0= root@dev-server.com
+[root@dev-server .ssh]# cd
+[root@dev-server ~]# git status
+fatal: not a git repository (or any of the parent directories): .git
+[root@dev-server ~]# cd ..
+[root@dev-server /]# git status
+fatal: not a git repository (or any of the parent directories): .git
+[root@dev-server /]# cd /data/
+[root@dev-server data]# git init
+Reinitialized existing Git repository in /data/.git/
+[root@dev-server data]# git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        ishanjit.html
+
+nothing added to commit but untracked files present (use "git add" to track)
+[root@dev-server data]# git add .
+[root@dev-server data]# git commit -m first
+[master (root-commit) 88d4e2d] first
+ Committer: root <root@dev-server.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 ishanjit.html
+[root@dev-server data]# git git brnach -M main
+git: 'git' is not a git command. See 'git --help'.
+
+The most similar command is
+        init
+[root@dev-server data]# git brnach -M main
+git: 'brnach' is not a git command. See 'git --help'.
+
+The most similar command is
+        branch
+[root@dev-server data]# git remote add origin
+usage: git remote add [<options>] <name> <url>
+
+    -f, --[no-]fetch      fetch the remote branches
+    --[no-]tags           import all tags and associated objects when fetching
+                          or do not fetch any tag at all (--no-tags)
+    -t, --[no-]track <branch>
+                          branch(es) to track
+    -m, --[no-]master <branch>
+                          master branch
+    --[no-]mirror[=(push|fetch)]
+                          set up remote as a mirror to push to or fetch from
+
+[root@dev-server data]# git status
+On branch master
+nothing to commit, working tree clean
+[root@dev-server data]# git log
+commit 88d4e2dd499e99d099e573637cb20efe5b154747 (HEAD -> master)
+Author: root <root@dev-server.com>
+Date:   Thu Aug 7 10:32:12 2025 +0000
+
+    first
+[root@dev-server data]# git remote add origin git@github.com:ishanjit10840056/devops.git
+[root@dev-server data]# git remote remove origin
+[root@dev-server data]# git remote -v
+[root@dev-server data]# git status
+On branch master
+nothing to commit, working tree clean
+[root@dev-server data]# git log
+commit 88d4e2dd499e99d099e573637cb20efe5b154747 (HEAD -> master)
+Author: root <root@dev-server.com>
+Date:   Thu Aug 7 10:32:12 2025 +0000
+
+    first
+[root@dev-server data]# git remote add origin git@github.com:ishanjit10840056/devops.git
+[root@dev-server data]# git status
+On branch master
+nothing to commit, working tree clean
+[root@dev-server data]# git push origin main
+error: src refspec main does not match any
+error: failed to push some refs to 'github.com:ishanjit10840056/devops.git'
+[root@dev-server data]# git remote remove origin
+[root@dev-server data]# ll
+total 0
+-rw-r--r--. 1 root root 0 Aug  7 10:20 ishanjit.html
+[root@dev-server data]# git add .
+[root@dev-server data]# git status
+On branch master
+nothing to commit, working tree clean
+[root@dev-server data]# git commit -m one ishanjit.html
+On branch master
+nothing to commit, working tree clean
+[root@dev-server data]# git branch -M main
+[root@dev-server data]# git remote add origin git@github.com:ishanjit10840056/devops.git
+[root@dev-server data]# git remote -v
+origin  git@github.com:ishanjit10840056/devops.git (fetch)
+origin  git@github.com:ishanjit10840056/devops.git (push)
+[root@dev-server data]# git push origin main
+The authenticity of host 'github.com (140.82.112.3)' can't be established.
+ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 205 bytes | 205.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To github.com:ishanjit10840056/devops.git
+ * [new branch]      main -> main
+[root@dev-server data]# client_loop: send disconnect: Connection reset
+PS C:\Users\10840056\Downloads> ssh -i "jenkins-ishanjit.pem" ec2-user@ec2-54-145-6-12.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Thu Aug  7 10:17:17 2025 from 103.244.155.144
+[ec2-user@dev-server ~]$ sudo su -
+Last login: Thu Aug  7 10:17:20 UTC 2025 on pts/1
+[root@dev-server ~]# git status
+fatal: not a git repository (or any of the parent directories): .git
+[root@dev-server ~]# cd /data/
+[root@dev-server data]# git status
+On branch main
+nothing to commit, working tree clean
+[root@dev-server data]# cat ishanjit.html
+[root@dev-server data]# vim ishanjit.html
+[root@dev-server data]# git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   ishanjit.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[root@dev-server data]# git add .
+[root@dev-server data]# git commit -m mycommit ishanjit.html
+[main b6a0a43] mycommit
+ Committer: root <root@dev-server.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+)
+[root@dev-server data]# git status
+On branch main
+nothing to commit, working tree clean
+[root@dev-server data]# git remote -v
+origin  git@github.com:ishanjit10840056/devops.git (fetch)
+origin  git@github.com:ishanjit10840056/devops.git (push)
+[root@dev-server data]# vim ishanjit.html
+"ishanjit.html" 4L, 47B written
+[root@dev-server data]# git add .
+[root@dev-server data]# git status
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   ishanjit.html
+
+[root@dev-server data]# git commit -m ycommit ishanjit.html
+[main aba6f26] ycommit
+ Committer: root <root@dev-server.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+)
+[root@dev-server data]# git push origin main
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (6/6), 463 bytes | 463.00 KiB/s, done.
+Total 6 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To github.com:ishanjit10840056/devops.git
+   88d4e2d..aba6f26  main -> main
+[root@dev-server data]# client_loop: send disconnect: Connection reset
+PS C:\Users\10840056\Downloads>
