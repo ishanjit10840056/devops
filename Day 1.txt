@@ -1,0 +1,135 @@
+DevOps is a business technology which delivers end to end delivery/product.
+
+Types of environment
+1. Dev env
+2. Test env
+3. UAT(User acceptance Test) env
+4. Production env
+
+Types of kernel:
+ Modular
+ Monolithic
+
+LINUX is a Kernel - it uses modular kernel
+Windows run on monolithic kernel
+
+3 types of root in Linux
+ a. root - SuperUser / Power user
+ b. / - root partition ( like C drive)( where the OS is)
+ c. /root/home
+
+/swap space is like virtual memory its used when the ram is full
+/tmp is world readable and is automatically removed in 10 days
+
+/var/www/html is for apache server
+/var/ftp/pub
+
+EC2 - elastic compute cloud
+Instance - virtual system
+port - 22 for Linux
+port - 3389 for windows RDP
+
+sudo su - 
+For description of system -
+cat /etc/os-release
+
+for changing hostname
+hostnamectl set-hostname server.example.com
+
+bash
+ll - detailed directory listing
+ls - 
+names starting with l means link(sim/soft link) with d means directory
+files start with -
+touch filename.txt - to create a file
+rm filename.txt - to delete
+rm -rf - to forcefully delete
+su - username to login
+exit - to logout
+
+
+full name check command -> hostname
+display every(name system) information -> hostnamectl
+To know about IPs -> ip a s
+Linux is case and space sensitive
+
+etc/passwd is the file name with path
+cat command is used to read files also other ways
+nl command will print line number also infront of every line 
+less/etc/passwd : used to find any specific keyword in the file - /name
+
+mkdir nameofdirectory - to create directory
+pwd = print/present working directory
+cd / =to change directory
+
+bin - Linux stores basic commands here - (regular user)anyone can execute those ex- date,cal,ll,ls
+cd boot/ - main directory
+cd /dev - all devices are shown - Linux treats everything as a text file
+cd /etc - etc contains all system configuration files - only root can access it
+cd .. - to go back
+usr - user system resource
+sbin -> only root can execute all the commands - it contains all the command
+
+alias
+l. -> for hidden file or folder ( name start with .)
+alias cls=clear -> to set clear command also to be used as clear (nickname)
+-i = interactive
+to make alias permanent make its entry into .bashrc file
+
+How to create user :
+	useradd zain
+	passwd zain
+	then set password
+it doesn't take name - it creates a uid for user
+
+vim is a editor
+user is stored in vim/etc/passwd -> show users ( world readable file )
+vim/etc/shadow -> used to store password
+or cat/etc/shadow
+
+yum - package manager (like we double click in windows to install software)
+yum install httpd -y
+yum remove httpd -y
+
+cat > pooja.txt (create and store data)
+Hello all 
+Ctrl + d to save
+use - to change user i.e., su -zain
+if not the pwd will be root
+
+by default root password is lock
+: field separator 
+
+vim /etc/login.defs (change here to apply to all user)
+to change
+chage --help
+chage -E 30 -I 3 -m 5 -M 60 -W 10 zain
+
+Modification of user
+usermod --
+usermod -s/sbin/nologin draula (changed shell of user to nologin)
+then again usermod -s/bin/bash draula
+
+GROUPS:
+groupadd mktg
+groupadd sales
+cat /etc/group
+tail /etc/group (tail for bottom to top)
+head -n 5 /etc/group ( 5 lines from top to bottom of group)
+every user is a part of primary group
+secondary group we create and add user
+
+For help
+usermod --help
+
+To add to group
+usermod -G mktg ironman
+
+cat/etc/group | grep -i mktg (grep is used for specific files to show)
+
+a user can be part of more than one group
+usermod -aG sales ironman  (-a to append to another group) 
+
+To change group
+usermod -G sales ironman
+

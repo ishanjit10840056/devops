@@ -1,0 +1,101 @@
+Day 3
+
+Version Control ( Git & GitHub )
+
+Source code version control system > GIT
+
+Types of version control system
+	Centralized 
+	Distributed -- ex: GIT
+
+To setup a environment 
+we need atleast 3 VM
+
+SSH IS THE TRANSPORTATION MEDIUM
+SCP RUNS IN BACKEND OF SSH TO TRANSFER DATA
+
+sudo su -
+assign hostname (unique)
+IP address (unique)
+setup dns
+Linux to be installed on every machine
+Install Git Package on every machine (yum install git -y)
+SSH communication setup ( setup based on password & key based authentication )
+
+To set the machine as server :- git init --bare (run this command on only one machine to set it up as a server)
+
+----------------------------------------------------------
+
+you can ping the machine with the name or the IP
+if pinging with name we need to configure DNS server
+entry IP and name in vim /etc/hosts to setup DNS
+SSH work on port 22
+
+To update machine (package manager are dnf or yum for amazon)
+yum update -y
+
+rpmquery git - to check if git is installed
+
+To generate key (in dev machine not on server)
+ssh-keygen
+
+In server go to
+vim /etc/ssh/sshd_config
+and look for line 40 & 65 and type yes in them and remove comment #
+restart the services : systemctl restart sshd
+systemctl enable sshd
+
+In dev machines
+ssh-copy-id root@ipaddofserver
+
+cat authorized_keys in server to check if key is present
+
+NEXT
+move to dev machines
+move to the directories created
+ls -a to check if git is initialised
+create a index.html :- cat > index.html
+use: git add filename  (git add is used to put the file in git's tracked area)
+git status to check status
+git commit -m first-commit filename (-m is the message i.e., first-commit)
+git remote -v (to check if any remote location is present to push the file)
+git remote add origin root@ipofserver:/nameofdirectory ( it helps in making connection with server folder) 
+again git remote -v to check
+then
+git push origin master (master repository is available in directory(folder) we created in server)
+
+vim index.html to edit the file
+again file becomes untracked
+git add . (. which selects all file in the directory)
+git status
+
+git commit -m second_commit index.html
+
+again push it
+git push origin master  (the code will be pushed to master folder)
+
+in server move to the directory created then to refs then to heads to see master repo
+
+git log to check how many times files are commited
+
+
+IN new dev machine
+
+do
+git clone root@ipofroot:/directoryinroot
+then move to the directoryofroot in the new machine only
+you will get the codes/files there
+
+then edit via 
+vim index.html
+
+then git add .
+git commit -m commitname(whatever you name the new commit done) index.html
+git push origin master
+
+if other dev-one want to check other persons(dev-two) made changes - then he need to do
+git pull origin master
+
+----------------------------------------------------------------------------------------------------------
+
+

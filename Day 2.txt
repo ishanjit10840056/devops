@@ -1,0 +1,102 @@
+Day 2
+
+Permissions in Linux
+
+Types:
+	U - User
+	G - Group
+	O - Other
+ascii Linux is shown by . (security Linux) - it means ascii Linux is enabled on this machine
+
+ll -d devops.txt 
+Shows the file
+
+ll -d /data/
+
+r- read  or   4
+w- write or   2
+x- execute or 1
+which is total of 7
+
+To change file ownership
+chown permission <resource name>
+chown jk /salesdata/
+
+To change group ownership
+chgrp permission <resource name>
+ex : chgrp sales/salesdata/
+
+To change file permissions
+chmod 777 /data
+first 7 - user second 7- group third 7-other
+
+or,
+chmod u+rwx g+rwx o-rwx /data
+
+Max permission on folder - 777
+Max permission on file - 666
+
+sticky bit permission is inherited on the folder, so that user can read others data but cannot delete it
+Sticky bit is always applied to others
+chmod o+t /salesdata/
+
+To move : mv zain.txt /salesdata/
+
+SG id bit is at group level so that we can modify(write) files in the group
+chmod g+s /salesdata/
+drwxrws--T.
+It gets executed on the new files created after this
+
+To append in a file
+cat >> devops.txt
+
+If we exit we become SUDO user as Aws - ec2-user@server
+SUDO user has some special command rights - 
+Sudo user's name starts with sudo
+
+--
+whereis "command" : tells where the source of command is
+
+cd/var/log/ -to see the log directory
+ll
+
+fdisk -l :- to show storage and partition
+
+jacksparrow     ALL=(ALL)       /usr/sbin/useradd, /usr/sbin/passwd, !/usr/sbin/passwd root
+
+
+DAEMON
+
+uname -r
+uname -a
+rpmquery httpd - to know if the package is installed or not
+
+vim /etc/httpd/conf/httpd.conf
+
+systemctl status httpd - to know about the service
+
+systemctl start httpd - to start the service
+
+reboot from aws instance and again httpd stops
+again start
+then
+systemctl enable httpd
+
+cd /var/www/html/ -: to move to html folder
+echo "this is my html file" > index.html
+curl http://localhost
+
+apache by default runs on port 80 so allow port 80 in aws security group inbound rules
+
+vim /etc/httpd/conf/httpd.conf  -- to edit or config
+
+
+default document 
+
+systemctl reload-or-restart httpd.service (mostly to be reused as machine checks reload or restart is required and does accordingly to reflect new changes)
+
+systemctl stop httpd (to stop a service)
+systemctl disable httpd ( to permanently disable a service )
+
+systemctl mask httpd ( to keep the service away from getting started or enabled)
+systemctl unmask httpd
