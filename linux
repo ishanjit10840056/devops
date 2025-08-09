@@ -1,0 +1,12 @@
+ 1  useradd ramesh
+    passwd ramesh
+    3  usermod -G wheel ramesh       #########  usermod -aG nobody ramesh
+    4  cat /etc/group | grep -i wheel
+    5  useradd dipak
+    6  passwd dipak
+    7  vim /etc/sudoers
+    8  su - dipak
+        sudo passwd jk
+        cat /etc/passwd
+    9 exit
+   11  history
