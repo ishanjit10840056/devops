@@ -62,7 +62,7 @@ ll
 
 fdisk -l :- to show storage and partition
 
-jacksparrow     ALL=(ALL)       /usr/sbin/useradd, /usr/sbin/passwd, !/usr/sbin/passwd root
+jacksparrow     ALL=(ALL)       /usr/sbin/useradd, /usr/bin/passwd, !/usr/sbin/passwd root
 
 
 DAEMON
@@ -99,4 +99,5 @@ systemctl stop httpd (to stop a service)
 systemctl disable httpd ( to permanently disable a service )
 
 systemctl mask httpd ( to keep the service away from getting started or enabled)
+
 systemctl unmask httpd
