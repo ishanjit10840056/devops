@@ -224,14 +224,22 @@ VPC peering
 
 
 NOW DO VIA VPC PEERING
-GO TO NV -> PEERING CONNECTION (SEARCH VPC TO FIND IT)
-•	name->nvtoohio
-•	vpc Id -> your vpc id
-•	region another select ohio (go to vpc in ohio and copy vpc id)
-•	paste the id
-•	create
-•	Now go to ohio -> peering connection => you will find request (it will take time)
 
+GO TO NV -> PEERING CONNECTION (SEARCH VPC TO FIND IT)
+
+name->nvtoohio
+
+vpc Id -> your vpc id
+
+region another select ohio (go to vpc in ohio and copy vpc id) paste the id create
+
+Now go to ohio -> peering connection => you will find request (it will take time) Select -> actions -> accept request -> wait till it go active
+
+Add 20.0.0.0 /16 in NV region -> routing table -> select peering connection
+
+Add 10.0.0.0 /16 in OHIO region -> routing table -> select peering connection allow icmp ipv4 in both region security group
+
+ping on both private ip and it will connect
 ########################################################################
 
 S3
