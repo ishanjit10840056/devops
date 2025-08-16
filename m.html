@@ -152,15 +152,20 @@ Efs common project in same region share project
 •	Search for EFS -> create file system -> set name(my-efs) -> VPC default -> create file system
 •	Connect all instances in the terminal
 •	On machine 1:
+
 •	rpmquery nfs-utils -> which is by default on amazon Linux
 •	systemctl start nfs-utils
-•	systemctl status nfs-utis
+•	systemctl status nfs-utils
+
 •	On machine 2:
+
 •	sudo su -
 •	apt update
 •	apt install nfs-common (nfs-common is name of the package in ubuntu)
 •	systemctl start nfs-utils.service
+
 •	On machine 3:
+
 •	sudo su -
 •	yum install nfs-utils -y
 •	________________________________________
