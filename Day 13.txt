@@ -1,0 +1,87 @@
+Day 13
+
+Courses to do:
+RHCSA-RHEL-> 10-20k
+AWS-SAA-> 12-15k
+CKA -> 35k
+Terraform TCA -> 10K
+-----------------------------------------------------------------------
+ROUTE53 is a DNS service
+-------------------------
+KOPS -> Kubernetes operation -> it will help to build load balancer and auto-
+scaling.
+
+Creating Kubernetes clusters with KOPS:
+
+Launch an instance with ubuntu 22.04, t3.micro, create key pair, create security group, 10gb space -> launch instance
+
+Connect the instance in terminal-
+apt update -y
+
+#FYI#
+#Go to amazon and install amazon cli for Linux
+#install kubectl binary curl
+#install kops -> k8s.io -> deploying to aws 
+
+go to sir's repo -> k8s-cluster-with-kops
+
+
+https://github.com/sanjayguruji/Sanjaya-K8S-Code/blob/main/k8s-cluster-with-kops
+
+Default output format: table
+
+Create the user with admin permission (not to be given in production)
+Create a IAM role and give access to it -> select ec2
+
+Go to ec2 instance select it, action - security group -> Modify IAM role
+
+Go to amazon -> search for ROUTE53
+HOSTED ZONE
+Create hosted zone
+name -> zain.in
+private hosted zone
+us-east-1
+vpc default
+created hosted zone
+
+then ssh-keygen
+
+copy the last command after cluster creation and run in -> kops update cluster dev.k8s.sanjayskv.in --yes --admin
+
+then 
+kops validate cluster -> to check the current state
+kops get cluster -> to see the cluster
+
+
+Now create a pod inside the cluster
+To create pod after deletion
+kubectl get pod
+vim g-pod.yaml
+kubectl apply -f g-pod.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: g-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: g-demo
+  template:
+    metadata:
+      labels:
+        app: g-demo
+    spec:
+      containers:
+      - name: qos-demo-ctr
+        image: nginx
+        resources:
+          limits:
+            memory: "200Mi"
+            cpu: "700m"
+          requests:
+            memory: "200Mi"
+            cpu: "700m"
+kubectl get pod
+kubectl delete pod g-deployment-55d88cc8f7-8xmhj
+kubectl get pod
