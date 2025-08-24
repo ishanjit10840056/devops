@@ -1,0 +1,117 @@
+Day 15
+
+Host 3 machine with 3 OS and container engine
+control plane -> ubuntu 22.04, container-d (follow all steps from sir's GitHub)
+
+worker-node-1 -> redhat/centos, docker
+For redhat -> https://github.com/sanjayguruji/Sanjaya-K8S-Code/blob/main/Host%20K8S%20cluster%20using%20Docker%20with%20RHEL-9
+
+To edit go to line 127 for SystemCgroup - true
+
+worker-node-2 -> ubuntu, container-d
+
+
+
+sudo dnf install kernel-devel-$(uname -r) -> it tells about kernel version
+
+after the service reboot go to ->
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/   
+select red hat-based distributions
+sudo setenforce -> and follow the certain commands from website to install
+the Kubernetes and kubectl service.
+-> the GitHub repo of redhat had control plane commands below, make sure to stop before that.
+
+Now create pod - replicas: 3
+
+kubectl describe replicaset web-app(web-app is the metadata name)
+
+to get output in detail -> get in yaml file
+kubectl get pods web-app -o yaml
+
+to save output in a file
+kubectl get pods web-app -o yaml > file.txt
+
+kubectl api-resources -> to know about the api version
+
+How to change the label of the pod
+
+kubectl label pods web-app name=devops
+
+
+AUTOSCALING OF PODS https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+ (HPA - HORIZONTAL PART AUTOSCALING)
+
+go on website autoscaling/v1
+min of 2 max of 10
+
+kubectl get hpa
+kubectl apply -f hps-pod.yaml
+
+kubectl describe hpa devops-scaler
+
+apply command helps in creating and updating but create command only
+helps just to create
+
+---------------------------------------------------------------------------
+REDHAT NODE NOT RUNNING SOLUTION
+mkdir -p /run/systemd/resolve
+ln -s /etc/resolv.conf /run/systemd/resolve/resolv.conf
+ls -l  /run/systemd/resolve/resolv.conf
+lrwxrwxrwx. 1 root root 16 Aug 22 09:50 /run/systemd/resolve/resolv.conf -> /etc/resolv.conf
+systemctl restart kubelet
+/run/systemd/resolve/resolv.conf
+ 
+-----------------------------------------------------------------------
+
+watch kubectl get pod (get pods --watch)
+
+kubectl delete rs nameofdeploymentreplicaset
+it will again create rs
+
+rolling update: 
+kubectl editdeployment/nameofdeployment
+
+change policies to see changes
+
+------------------------------------------------------------------------
+
+Now via command:
+kubectl set image deployment/nginx-deployment nginx=nginx:1.18
+
+
+It stores last 5 version's as replica sets so that it can be rolled out
+again when needed
+---------------------------------------------------------------------------
+https://kubernetes.io/docs/concepts/services-networking/service/
+
+We create a service over the deployment so that we can connect to the 
+deployment remotely(photo in phone)
+
+Types of services:
+Cluster IP service, Node pod service, Load balancer service 
+
+kubectl get svc (to get the services and ip)
+
+create a service(from website)
+enter cluster ip from kubectl get svc
+type load balancer
+target port 8080
+
+---------------------------------------------------------------------------
+EKS CLUSTER CREATION
+Amazon manages the cluster, you dont have rights. 
+It is a PAAS service
+
+EKS can be done via web console, CLI, Ansible, Terraform
+
+https://github.com/sanjayguruji/Sanjaya-K8S-Code/blob/main/Eks-cluster-creating
+
+First create an EC2 instance-> ubuntu 22.04 -> 
+
+then follow sir's repo steps
+Create IAM user - access key and attach it with ec2 instance
+
+Go to EKS in AWS and you will see your cluster
+----------------------------------------------------------------------------------
+
+AWS cloud formation converts the command from CLI to JSON and then cluster is made.
