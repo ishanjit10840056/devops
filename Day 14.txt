@@ -1,0 +1,104 @@
+Day 14
+
+Kubernetes made a interface called CNI(Container network interface) -> it helps in equal communication
+with all other container
+Kubernetes made a interface for docker called Docker shim -> later it
+got converted to CNI for docker also.
+
+Kubernetes makes the pod - the container made inside pod is runC
+
+Docker you need to manually start container runtime, but in podman the container runtime starts 
+automatically
+
+Isolation in Kubernetes is based on two things, namespace and c-group (photo in copy)
+
+--------------------------------------------------------------------------------------------------------------
+
+To check the namespace automatically created
+kubectl get ns
+
+kubectl get pod -n kube-system  -> list all pod inside kube-system
+
+yaml file should start with --- (3 hypher )-> just to tell that it is a yaml file
+
+If we dont specify namespace inside yaml then it goes to default namespace
+
+
+Q. Creating namespace in Kubernetes
+
+kubectl get namespace  -> this command will list all the namespace (ns)
+
+kubectl create ns production -> to create a namespace
+
+now create pod with the new namespace (you cannot deploy same name pod in same namespace)
+
+kubectl apply -f dev-pod.yaml --namespace=production  (or enter vim production.yaml and enter namespace: production then
+												kubectl apply -f dev-pod.yaml )
+
+now to check the pod
+
+kubectl get pod -n production
+
+HOW TO CHANGE CONTEXT OF NAMESPACE (Directly the pod will be made in production not default)
+https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+
+kubectl config set-context --current --namespace=prodcution
+
+kubectl get pod
+
+kubectl apply -f prod-pod.yaml (the one running in default also will be converted to production)
+
+kubectl get pod
+
+kubectl config view --minify (shows the configuration)
+
+
+change to default again
+kubectl config set-context --current --namespace=default
+
+vim namespace.yaml
+set your namespace,
+check kubectl get ns
+
+
+To assign resource to namespace
+
+go to -> website and copy the namespace resource allocation part
+https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/
+
+vim qos-cpu-mem.yaml -> paste (while making make sure kind is ResourceQuota)
+write namespace: production
+request-cpu: "100m"
+req.mem: 100Mi
+limitcpu: "300m"
+limit.mem: 400mi
+
+kubectl apply -f qos-cpu-mem.yaml --namespace=production
+kubectl describe namespace production
+
+go to website and copy the pod with hardware resource part
+
+Now make pod
+
+vim cpu-mem.yaml
+paste it
+allocate the mem (if you go higher than resource it wont deploy)
+kubectl apply -f cpu-mem.yaml
+kubectl apply -f cpu-mem.yaml --namespace=production
+
+kubectl get resourcequota resource-quota-name --namespace=quota --output=yaml
+
+--------------------------------------------------------------------------
+https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+Creating ReplicaSet:
+
+vim replicateset.yaml -> kind: ReplicaSet
+
+kubectl apply -f replicaset.yaml
+kubectl get rs
+kubectl get pod
+
+
+
+
+
